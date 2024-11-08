@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { questions } from "../data/questions";
-import { products } from "../data/products";
 import Hero from "./Hero";
 import Stepper from "./Stepper";
 
@@ -12,6 +11,10 @@ const MainSupport = () => {
   const handleOptionSelect = (nextId) => {
     setQuestionId(nextId);
   };
+
+  if (!currentQuestion) {
+    return null;
+  }
 
   return (
     <section className="flex flex-col items-center justify-center gap-10 pt-12 md:pt-24">
@@ -25,7 +28,6 @@ const MainSupport = () => {
           question={currentQuestion.question}
           message={currentQuestion.message}
           options={currentQuestion.options || []}
-          products={products}
           handleOptionSelect={handleOptionSelect}
           freeWriting={currentQuestion.freeWriting}
         />

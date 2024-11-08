@@ -4,7 +4,7 @@ const Question = ({ question, options, handleOptionSelect }) => {
   return (
     <div className="flex flex-col items-center justify-center w-full gap-8">
       <img
-        src="/supportnacon/questionmark.svg"
+        src="/naconsupport/questionmark.svg"
         alt="Realizar una consulta"
         width={70}
         height={70}

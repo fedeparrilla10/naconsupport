@@ -16,7 +16,7 @@ const Form = ({ question, options, freeWriting, handleOptionSelect }) => {
   return (
     <div className="flex flex-col items-center justify-center w-full gap-4">
       <img
-        src="/supportnacon/questionmark.svg"
+        src="/naconsupport/questionmark.svg"
         alt="Realizar una consulta"
         width={40}
         height={40}

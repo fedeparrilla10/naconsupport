@@ -1,6 +1,7 @@
 import Question from "./Question";
 import Form from "./Form";
-import Select from "./Select";
+import SelectProduct from "./SelectProduct";
+import SelectStore from "./SelectStore";
 import EndMessage from "./EndMessage";
 
 const Stepper = ({
@@ -8,7 +9,6 @@ const Stepper = ({
   question,
   message,
   options,
-  products,
   freeWriting,
   handleOptionSelect,
 }) => {
@@ -29,12 +29,18 @@ const Stepper = ({
           freeWriting={freeWriting}
         />
       )}
-      {type === "select" && (
-        <Select
+      {type === "select_product" && (
+        <SelectProduct
           question={question}
           options={options}
           handleOptionSelect={handleOptionSelect}
-          products={products}
+        />
+      )}
+      {type === "select_store" && (
+        <SelectStore
+          question={question}
+          options={options}
+          handleOptionSelect={handleOptionSelect}
         />
       )}
       {type === "end" && (

@@ -37,24 +37,15 @@ export const questions = [
   {
     id: 5,
     category: "general",
-    type: "select",
+    type: "select_product",
     question: "¿Sobre qué producto quiere hacer su consulta?",
-    options: [
-      { label: "Revolution 5 Pro", value: "rev5pro" },
-      { label: "RIG 600", value: "rig600" },
-      { label: "PCCH 675", value: "pcch675" },
-    ],
   },
   {
     id: 6,
     category: "warranty",
-    type: "select",
+    type: "select_product",
     question: "¿Sobre qué producto quiere gestionar su garantía?",
-    options: [
-      { label: "Revolution 5 Pro", value: "rev5pro" },
-      { label: "RIG 600", value: "rig600" },
-      { label: "PCCH 675", value: "pcch675" },
-    ],
+    options: { nextId: 8 },
   },
   {
     id: 7,
@@ -62,5 +53,13 @@ export const questions = [
     type: "end",
     message:
       "Gracias por su consulta. Nos pondremos en contacto con usted lo antes posible.",
+  },
+  {
+    id: 8,
+    category: "warranty",
+    type: "select_store",
+    message:
+      "Gracias. Este es su producto sobre el que vamos a gestionar la garantía.",
+    question: "¿En qué establecimiento adquirió este producto?",
   },
 ];

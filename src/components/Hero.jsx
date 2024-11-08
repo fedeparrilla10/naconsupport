@@ -17,7 +17,7 @@ const Hero = ({ handleOptionSelect }) => {
           onClick={() => handleOptionSelect(2)}
         >
           <img
-            src="/supportnacon/questionmark.svg"
+            src="/naconsupport/questionmark.svg"
             alt="Realizar una consulta"
             width={70}
             height={70}
@@ -30,7 +30,7 @@ const Hero = ({ handleOptionSelect }) => {
           onClick={() => handleOptionSelect(3)}
         >
           <img
-            src="/supportnacon/warranty.svg"
+            src="/naconsupport/warranty.svg"
             alt="Realizar una consulta"
             width={70}
             height={70}

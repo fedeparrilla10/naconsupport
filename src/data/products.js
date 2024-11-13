@@ -5,6 +5,7 @@ export const products = [
     value: "rev5pro",
     category: "Mandos",
     image: "/naconsupport/revolution5pro.png",
+    link: "https://www.naconespana.es/main/productos/revolution5pro/",
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ export const products = [
     value: "rig600",
     category: "Auriculares",
     image: "/naconsupport/rig600.png",
+    link: "https://www.naconespana.es/main/productos/rig600/",
   },
   {
     id: 3,
@@ -19,5 +21,6 @@ export const products = [
     value: "pcch675",
     category: "Sillas",
     image: "/naconsupport/pcch675.webp",
+    link: "https://www.naconespana.es/main/productos/pcch675/",
   },
 ];

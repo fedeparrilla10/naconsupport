@@ -1,0 +1,58 @@
+import { useState } from "react";
+import dayjs from "dayjs";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import Button from "./Button";
+
+const SelectDate = ({ message, question, options, handleOptionSelect }) => {
+  console.log("🚀 ~ SelectDate ~ options:", options);
+  const [date, setDate] = useState(dayjs());
+  const minDate = dayjs().subtract(3, "year");
+  const isValidDate = date < minDate;
+
+  return (
+    <section className="flex flex-col items-center justify-center w-full gap-4">
+      <h3 className="text-xl">{message}</h3>
+      <h3 className="text-xl">{question}</h3>
+      <div className="flex flex-col items-center gap-4">
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            className="xl:w-1/4"
+            format="DD/MM/YYYY"
+            value={date}
+            onChange={(newDate) => setDate(newDate)}
+            sx={{
+              backgroundColor: "white",
+              color: "black",
+              borderRadius: "0.5rem",
+            }}
+          />
+        </LocalizationProvider>
+        <p className="pt-2 md:pt-1 md:w-1/2">
+          Recuerde que todas las garantías tienen una fecha de caducidad de tres
+          años. Si el producto fue adquirido antes de ese intervalo de tiempo,
+          no podrá solicitarla.
+        </p>
+        {isValidDate && (
+          <p className="text-sm text-red-500">
+            La fecha de compra no puede ser anterior al{" "}
+            {minDate.format("DD/MM/YYYY")}
+          </p>
+        )}
+      </div>
+      <div className="mt-4 mb-10">
+        <Button
+          content="Continuar"
+          onClick={() =>
+            handleOptionSelect(
+              !isValidDate ? options.validDateNextId : options.invalidDateNextId
+            )
+          }
+        />
+      </div>
+    </section>
+  );
+};
+
+export default SelectDate;

@@ -30,6 +30,7 @@ const MainSupport = () => {
           options={currentQuestion.options || []}
           handleOptionSelect={handleOptionSelect}
           freeWriting={currentQuestion.freeWriting}
+          storeData={currentQuestion.storeData}
         />
       )}
     </section>

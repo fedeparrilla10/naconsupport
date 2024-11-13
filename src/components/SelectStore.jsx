@@ -78,7 +78,11 @@ const SelectStore = ({ question, options, handleOptionSelect }) => {
         <Button
           content="Continuar"
           isDisabled={!selectedStore}
-          onClick={() => handleOptionSelect(options.nextId)}
+          onClick={() =>
+            handleOptionSelect(
+              selectedRetail.sat ? options.satNextId : options.noSatNextId
+            )
+          }
         />
       </div>
     </section>

@@ -61,5 +61,60 @@ export const questions = [
     message:
       "Gracias. Este es su producto sobre el que vamos a gestionar la garantía.",
     question: "¿En qué establecimiento adquirió este producto?",
+    options: { noSatNextId: 9, satNextId: 10 },
+  },
+  {
+    id: 9,
+    category: "warranty",
+    type: "end",
+    message:
+      "La gestión de Garantías de productos NACON en AMAZON / NACONGAMING.COM / ECI se debe realizar directamente con la tienda dónde adquirió su producto. A continuación le facilitamos los datos de contacto.",
+    storeData: true,
+  },
+  {
+    id: 10,
+    category: "warranty",
+    type: "select_date",
+    message:
+      "Gracias por identificar su producto y la tienda dónde lo ha adquirido.",
+    question: "¿Cuál fue la fecha en la que compró el producto?",
+    options: { invalidDateNextId: 11, validDateNextId: 12 },
+  },
+  {
+    id: 11,
+    category: "warranty",
+    type: "end_products",
+    message:
+      "¡Lo sentimos! No es posible reclamar la garantía de este artículo.",
+    question:
+      "Te ofrecemos las siguientes opciones para comprar un nuevo producto:",
+  },
+  {
+    id: 12,
+    category: "warranty",
+    type: "file",
+    subtype: "ticket",
+    message:
+      "Por favor, adjunte una imagen del ticket de su compra e inserte el número del mismo.",
+    options: [
+      { text: "Continuar", nextId: 13, hasCondition: true },
+      {
+        text: "No tengo ticket",
+        nextId: 11,
+      },
+    ],
+  },
+  {
+    id: 13,
+    category: "warranty",
+    type: "picture_files",
+    message: "Por favor, adjunte como máximo 5 fotografías del producto.",
+    options: [
+      { text: "Continuar", nextId: 14 },
+      {
+        text: "No tengo fotos",
+        nextId: 11,
+      },
+    ],
   },
 ];

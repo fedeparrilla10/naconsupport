@@ -1,12 +1,5 @@
 import { useForm, Controller } from "react-hook-form";
-import {
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  Radio,
-  FormControlLabel,
-  Typography,
-} from "@mui/material";
+import { RadioGroup, Radio, FormControlLabel, Typography } from "@mui/material";
 import Button from "./Button";
 
 const WarrantyForm = ({ question, options, handleOptionSelect }) => {

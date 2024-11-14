@@ -1,4 +1,5 @@
 import Question from "./Question";
+import FAQ from "./FAQ";
 import Form from "./Form";
 import WarrantyForm from "./WarrantyForm";
 import SelectProduct from "./SelectProduct";
@@ -27,6 +28,9 @@ const Stepper = ({
           options={options}
           handleOptionSelect={handleOptionSelect}
         />
+      )}
+      {type === "faq" && (
+        <FAQ question={question} handleOptionSelect={handleOptionSelect} />
       )}
       {type === "form" && (
         <Form

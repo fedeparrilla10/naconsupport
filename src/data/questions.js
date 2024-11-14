@@ -39,6 +39,7 @@ export const questions = [
     category: "general",
     type: "select_product",
     question: "¿Sobre qué producto quiere hacer su consulta?",
+    options: { nextId: 17 },
   },
   {
     id: 6,
@@ -138,5 +139,14 @@ export const questions = [
     type: "warranty_form",
     question: "Necesitamos que nos indique las respuestas a estas preguntas:",
     options: { invalidNextId: 11, validNextId: 16 },
+  },
+  {
+    id: 16,
+  },
+  {
+    id: 17,
+    category: "general",
+    type: "faq",
+    question: "Manuales & Preguntas Frecuentes",
   },
 ];

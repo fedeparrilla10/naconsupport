@@ -14,7 +14,7 @@ const Button = ({
       disabled:bg-gray-300 disabled:cursor-not-allowed disabled:opacity-50"
     >
       <img
-        src="continue.svg"
+        src="/naconsupport/continue.svg"
         alt="Continue"
         className="inline-block w-6 h-6 me-2"
       />

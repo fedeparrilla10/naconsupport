@@ -110,11 +110,33 @@ export const questions = [
     type: "picture_files",
     message: "Por favor, adjunte como máximo 5 fotografías del producto.",
     options: [
-      { text: "Continuar", nextId: 14 },
+      { text: "Continuar", nextId: 14, hasCondition: true },
       {
         text: "No tengo fotos",
         nextId: 11,
       },
     ],
+  },
+  {
+    id: 14,
+    category: "warranty",
+    type: "file",
+    subtype: "video",
+    message:
+      "Por favor, adjunte un vídeo de producto funcionando incorrectamente. Es importante que podamos ver claramente el fallo que presenta.",
+    options: [
+      { text: "Continuar", nextId: 15, hasCondition: true },
+      {
+        text: "No tengo vídeo",
+        nextId: 11,
+      },
+    ],
+  },
+  {
+    id: 15,
+    category: "warranty",
+    type: "warranty_form",
+    question: "Necesitamos que nos indique las respuestas a estas preguntas:",
+    options: { invalidNextId: 11, validNextId: 16 },
   },
 ];

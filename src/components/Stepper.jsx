@@ -1,14 +1,17 @@
 import Question from "./Question";
 import Form from "./Form";
+import WarrantyForm from "./WarrantyForm";
 import SelectProduct from "./SelectProduct";
 import SelectStore from "./SelectStore";
 import SelectDate from "./SelectDate";
 import EndMessage from "./EndMessage";
 import EndProducts from "./EndProducts";
 import UploadFile from "./UploadFile";
+import UploadImages from "./UploadImages";
 
 const Stepper = ({
   type,
+  subtype,
   question,
   message,
   options,
@@ -31,6 +34,13 @@ const Stepper = ({
           options={options}
           handleOptionSelect={handleOptionSelect}
           freeWriting={freeWriting}
+        />
+      )}
+      {type === "warranty_form" && (
+        <WarrantyForm
+          question={question}
+          options={options}
+          handleOptionSelect={handleOptionSelect}
         />
       )}
       {type === "select_product" && (
@@ -72,6 +82,15 @@ const Stepper = ({
       )}
       {type === "file" && (
         <UploadFile
+          subtype={subtype}
+          message={message}
+          question={question}
+          options={options}
+          handleOptionSelect={handleOptionSelect}
+        />
+      )}
+      {type === "picture_files" && (
+        <UploadImages
           message={message}
           question={question}
           options={options}

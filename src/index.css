@@ -2,8 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
 .container-bg {
   background: url("/public/supportbg.png") no-repeat center center fixed;
   background-size: cover;
-  min-height: 100vh; /* Asegura que el contenedor tenga al menos la altura de la ventana gráfica */
+  min-height: 100vh;
 }

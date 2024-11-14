@@ -25,6 +25,7 @@ const MainSupport = () => {
       ) : (
         <Stepper
           type={currentQuestion.type}
+          subtype={currentQuestion.subtype}
           question={currentQuestion.question}
           message={currentQuestion.message}
           options={currentQuestion.options || []}

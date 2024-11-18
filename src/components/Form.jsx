@@ -2,7 +2,13 @@ import { useForm } from "react-hook-form";
 import Button from "./Button";
 import useUserData from "../store/useUserData";
 
-const Form = ({ question, options, freeWriting, handleOptionSelect }) => {
+const Form = ({
+  message,
+  question,
+  options,
+  freeWriting,
+  handleOptionSelect,
+}) => {
   const updateContactFormData = useUserData(
     (state) => state.updateContactFormData
   );
@@ -19,18 +25,16 @@ const Form = ({ question, options, freeWriting, handleOptionSelect }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full gap-4">
-      <img
-        src="/naconsupport/questionmark.svg"
-        alt="Realizar una consulta"
-        width={40}
-        height={40}
-        className="hidden md:block"
-      />
-      <h3 className="text-xl">{question}</h3>
+    <div className="flex flex-col items-center justify-center w-full gap-4 pb-12">
+      <div>
+        <p className="text-center md:text-start px-8 uppercase text-lg font-semibold">
+          {message}
+        </p>
+        <h3 className="text-2xl">{question}</h3>
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center justify-around w-2/4 gap-3 md:gap-4"
+        className="flex flex-col items-center justify-around w-2/4 gap-3 md:gap-4 pt-4"
       >
         <input
           {...register("name", {
@@ -96,7 +100,14 @@ const Form = ({ question, options, freeWriting, handleOptionSelect }) => {
               className="h-4 w-4 text-blue-600"
             />
             <label htmlFor="terms" className="text-sm">
-              Acepto los términos y condiciones
+              Acepto los{" "}
+              <a
+                target="_blank"
+                href="https://www.nacongamers.es/info/condiciones_venta"
+                className="underline"
+              >
+                términos y condiciones
+              </a>
             </label>
           </div>
 
@@ -109,7 +120,14 @@ const Form = ({ question, options, freeWriting, handleOptionSelect }) => {
               className="h-4 w-4 text-blue-600"
             />
             <label htmlFor="privacy" className="text-sm">
-              Acepto la política de privacidad
+              Acepto la{" "}
+              <a
+                target="_blank"
+                className="underline"
+                href="https://www.nacongamers.es/info/politica_privacidad"
+              >
+                política de privacidad
+              </a>
             </label>
           </div>
         </div>
@@ -127,8 +145,12 @@ const Form = ({ question, options, freeWriting, handleOptionSelect }) => {
           </p>
         )}
 
-        <div className="mt-2 mb-8">
-          <Button type="submit" content="Continuar" />
+        <div className="mt-4">
+          <Button
+            type="submit"
+            content="Enviar Formulario"
+            icon={options.icon}
+          />
         </div>
       </form>
     </div>

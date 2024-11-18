@@ -2,10 +2,10 @@ const Hero = ({ handleOptionSelect }) => {
   return (
     <main className="flex flex-col items-center gap-8">
       <div>
-        <p className="text-center md:text-start px-8">
+        <p className="text-center md:text-start px-8 uppercase text-lg font-semibold pt-4">
           Gracias por contactar con el servicio de ATENCIÓN AL CLIENTE de NACON.
         </p>
-        <h2 className="text-center text-wrap text-3xl px-2 md:text-4xl tracking-wide pt-10 md:pt-2">
+        <h2 className="text-center text-wrap text-2xl px-2 md:text-4xl tracking-wide pt-8 md:pt-2">
           ¿Cómo podemos ayudarte?
         </h2>
       </div>
@@ -13,7 +13,7 @@ const Hero = ({ handleOptionSelect }) => {
       <div className="flex flex-row md:flex-row gap-8 pt-5">
         <button
           className="border-2 border-gray-500 w-40 h-42 md:w-48 md:h-48 grid grid-cols-1 grid-rows-2 place-items-center cursor-pointer rounded-lg hover:bg-gray-700 hover:text-white 
-          transition duration-300 ease-in-out transform hover:scale-105 px-4"
+          transition duration-300 ease-in-out transform hover:scale-105 px-4 h-[180px]"
           onClick={() => handleOptionSelect(2)}
         >
           <img
@@ -26,7 +26,7 @@ const Hero = ({ handleOptionSelect }) => {
         </button>
         <button
           className="border-2 border-gray-500 w-40 h-42 md:w-48 md:h-48 grid grid-cols-1 grid-rows-2 place-items-center cursor-pointer rounded-lg hover:bg-gray-700 hover:text-white 
-          transition duration-300 ease-in-out transform hover:scale-105 px-4"
+          transition duration-300 ease-in-out transform hover:scale-105 px-4 h-[180px]"
           onClick={() => handleOptionSelect(3)}
         >
           <img

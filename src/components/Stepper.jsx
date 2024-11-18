@@ -25,6 +25,7 @@ const Stepper = ({
     <section className="w-full px-4 md:w-4/5 xl:w-3/4">
       {type === "question" && (
         <Question
+          message={message}
           question={question}
           options={options}
           handleOptionSelect={handleOptionSelect}
@@ -35,6 +36,7 @@ const Stepper = ({
       )}
       {type === "form" && (
         <Form
+          message={message}
           question={question}
           options={options}
           handleOptionSelect={handleOptionSelect}

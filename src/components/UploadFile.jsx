@@ -64,7 +64,7 @@ const UploadFile = ({
           </div>
         )}
       </div>
-      <div className="flex flex-col md:flex-row mt-4 mb-10">
+      <div className="flex flex-col-reverse md:flex-row mt-4 mb-10">
         {options.map((option) => (
           <Button
             key={option.nextId}
@@ -72,6 +72,7 @@ const UploadFile = ({
               option.hasCondition &&
               (!file || (subtype === "ticket" && !ticketNumber))
             }
+            icon={option.icon}
             content={option.text}
             onClick={() => handleSubmit(option.nextId)}
           />

@@ -188,7 +188,7 @@ const WarrantyForm = ({ question, options, handleOptionSelect }) => {
         </div>
 
         <div className="mt-2 mb-8">
-          <Button type="submit" content="Continuar" />
+          <Button type="submit" content="Continuar" icon={options.icon} />
         </div>
       </form>
     </div>

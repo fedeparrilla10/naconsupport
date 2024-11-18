@@ -21,11 +21,11 @@ const SelectStore = ({ question, options, handleOptionSelect }) => {
 
   return (
     <section className="flex flex-col items-center justify-center w-full gap-4">
-      <h3 className="text-xl">{question}</h3>
+      <h3 className="text-2xl text-center md:text-start">{question}</h3>
       <Autocomplete
         options={stores}
         getOptionLabel={(option) => option.name}
-        style={{ width: 300 }}
+        style={{ width: 300, paddingTop: 8 }}
         value={selectedStore || null}
         onChange={(event, newValue) => handleStore(event, newValue)}
         renderInput={(params) => (
@@ -38,11 +38,6 @@ const SelectStore = ({ question, options, handleOptionSelect }) => {
         )}
         renderOption={(props, option) => (
           <li {...props} key={option.name}>
-            <img
-              src={option.image}
-              alt={option.name}
-              className="w-8 h-8 object-contain mr-2"
-            />
             {option.name}
           </li>
         )}
@@ -64,11 +59,6 @@ const SelectStore = ({ question, options, handleOptionSelect }) => {
           )}
           renderOption={(props, option) => (
             <li {...props} key={option.name}>
-              <img
-                src={option.image}
-                alt={option.name}
-                className="w-8 h-8 object-contain mr-2"
-              />
               {option.name}
             </li>
           )}
@@ -78,9 +68,12 @@ const SelectStore = ({ question, options, handleOptionSelect }) => {
         <Button
           content="Continuar"
           isDisabled={!selectedStore}
+          icon={options.icon}
           onClick={() =>
             handleOptionSelect(
-              selectedRetail.sat ? options.satNextId : options.noSatNextId
+              selectedStore?.sat || selectedRetail?.sat
+                ? options.satNextId
+                : options.noSatNextId
             )
           }
         />

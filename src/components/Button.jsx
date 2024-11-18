@@ -3,6 +3,7 @@ const Button = ({
   onClick = null,
   type = "button",
   isDisabled = false,
+  icon = null,
 }) => {
   return (
     <button
@@ -13,11 +14,7 @@ const Button = ({
       py-4 me-2 mb-2 bg-transparent  hover:bg-gray-700 focus:ring-gray-700 border border-gray-500 transition duration-200 ease-in-out
       disabled:bg-gray-300 disabled:cursor-not-allowed disabled:opacity-50"
     >
-      <img
-        src="/naconsupport/continue.svg"
-        alt="Continue"
-        className="inline-block w-6 h-6 me-2"
-      />
+      <img src={icon} alt="Botón" className="inline-block w-6 h-6 me-2" />
       {content}
     </button>
   );

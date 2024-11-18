@@ -19,8 +19,7 @@ const SelectDate = ({ message, question, options, handleOptionSelect }) => {
 
   return (
     <section className="flex flex-col items-center justify-center w-full gap-4">
-      <h3 className="text-xl">{message}</h3>
-      <h3 className="text-xl">{question}</h3>
+      <h3 className="text-2xl text-center md:text-start">{question}</h3>
       <div className="flex flex-col items-center gap-4">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
@@ -50,6 +49,7 @@ const SelectDate = ({ message, question, options, handleOptionSelect }) => {
       <div className="mt-4 mb-10">
         <Button
           content="Continuar"
+          icon={options.icon}
           onClick={() =>
             handleSubmit(
               !isValidDate ? options.validDateNextId : options.invalidDateNextId

@@ -6,14 +6,14 @@ const EndProducts = ({ question, message, handleOptionSelect }) => {
     <section className="flex flex-col items-center justify-center w-full gap-4">
       <div className="flex flex-col items-center justify-center w-full gap-1.5">
         <img
-          src="/naconsupport/questionmark.svg"
-          alt="Realizar una consulta"
+          src="/naconsupport/error.svg"
+          alt="Error"
           width={70}
           height={70}
           className="pb-2"
         />
-        <h3 className="text-center">{message}</h3>
-        <p className="text-center">{question}</p>
+        <h3 className="text-center text-2xl">{message}</h3>
+        <p className="text-center text-2xl">{question}</p>
       </div>
       <article className="flex flex-col md:flex-row items-center gap-3 py-4">
         {products.map((product) => {
@@ -33,7 +33,9 @@ const EndProducts = ({ question, message, handleOptionSelect }) => {
           );
         })}
       </article>
-      <Button content="Volver a inicio" onClick={() => handleOptionSelect(1)} />
+      <a href="https://www.nacongamers.es/" className="mt-4">
+        <Button content="Volver a inicio" icon="/naconsupport/back.svg" />
+      </a>{" "}
     </section>
   );
 };

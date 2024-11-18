@@ -70,11 +70,12 @@ const UploadImages = ({ message, question, options, handleOptionSelect }) => {
           ))}
         </article>
       </div>
-      <div className="mt-4 mb-10 flex flex-col md:flex-row">
+      <div className="mt-4 mb-10 flex flex-col-reverse md:flex-row">
         {options.map((option) => (
           <Button
             key={option.nextId}
             isDisabled={option.hasCondition && images.length === 0}
+            icon={option.icon}
             content={option.text}
             onClick={() => handleSubmit(option.nextId)}
           />

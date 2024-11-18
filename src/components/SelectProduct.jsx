@@ -16,11 +16,11 @@ const SelectProduct = ({ question, options, handleOptionSelect }) => {
 
   return (
     <section className="flex flex-col items-center justify-center w-full gap-4">
-      <h3 className="text-xl">{question}</h3>
+      <h3 className="text-2xl text-center md:text-start">{question}</h3>
       <Autocomplete
         options={products}
         getOptionLabel={(option) => option.name}
-        style={{ width: 300 }}
+        style={{ width: 300, paddingTop: 8 }}
         value={selectedProduct || null}
         onChange={(event, newValue) => handleProduct(event, newValue)}
         renderInput={(params) => (
@@ -72,6 +72,7 @@ const SelectProduct = ({ question, options, handleOptionSelect }) => {
         <Button
           content="Continuar"
           isDisabled={!selectedProduct}
+          icon={options.icon}
           onClick={() => handleOptionSelect(options.nextId)}
         />
       </div>

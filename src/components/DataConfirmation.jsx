@@ -116,14 +116,17 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
 
           <div className="pt-6 flex flex-col items-center gap-4">
             <p className="font-bold">Vídeo del Producto</p>
-            <video className="w-3/4 xl:w-2/4 rounded-lg object-cover" controls>
+            <video
+              className="w-full md:w-3/4 xl:w-2/4 rounded-lg object-cover"
+              controls
+            >
               <source src={URL.createObjectURL(userMedia.video)} />
             </video>
           </div>
 
-          <div className="flex flex-col items-center w-full gap-4 pt-12">
+          <div className="flex flex-col items-center w-full gap-4 md:pt-12">
             <div className="flex flex-col md:flex-row items-center justify-around gap-8 md:gap-2">
-              <p className="w-full md:w-1/2 pt-10">
+              <p className="w-full md:w-1/2 pt-2 md:pt-10">
                 Declaro oficialmente que toda la información presentada a NACON
                 es la correcta. Entiendo que no será posible gestionar mi
                 garantía si alguno de estos datos son falsos o las imágenes y el
@@ -157,7 +160,12 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
           </div>
         </div>
       </div>
-      <Button content="Confirmar y continuar" isDisabled={!isSigned} />
+      <Button
+        content="Confirmar y continuar"
+        isDisabled={!isSigned}
+        icon={options.icon}
+        onClick={() => handleOptionSelect(options.nextId)}
+      />
     </section>
   );
 };

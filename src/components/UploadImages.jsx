@@ -31,8 +31,12 @@ const UploadImages = ({ message, question, options, handleOptionSelect }) => {
 
   return (
     <section className="flex flex-col items-center justify-center w-full gap-4">
-      <h3 className="text-xl">{message}</h3>
-      <h3 className="text-xl">{question}</h3>
+      <div className="flex flex-col items-center pb-4">
+        <p className="text-center md:text-start px-8 uppercase text-lg font-semibold">
+          {message}
+        </p>
+        <h3 className="text-2xl text-center md:text-start">{question}</h3>
+      </div>
       <div className="flex flex-col items-center justify-center gap-4">
         <div className="flex flex-col md:flex-row gap-3">
           <MuiFileInput

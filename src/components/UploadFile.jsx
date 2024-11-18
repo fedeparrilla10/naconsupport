@@ -32,16 +32,20 @@ const UploadFile = ({
 
   return (
     <section className="flex flex-col items-center justify-center w-full gap-4">
-      <h3 className="text-lg">{message}</h3>
-      <h3 className="text-xl">{question}</h3>
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center pb-4">
+        <p className="text-center md:text-start px-8 uppercase text-lg font-semibold">
+          {message}
+        </p>
+        <h3 className="text-2xl text-center md:text-start">{question}</h3>
+      </div>
+      <div className="flex flex-col items-center gap-4 pb-2">
         <MuiFileInput
           className="bg-slate-50 rounded-xl"
           value={file}
           onChange={handleChange}
           placeholder="Click para buscar e insertar el archivo"
+          inputProps={subtype === "video" && { accept: "video/*" }}
         />
-
         {/* Si es para subir el ticket */}
         {subtype === "ticket" && (
           <TextField
@@ -52,7 +56,6 @@ const UploadFile = ({
             fullWidth
           />
         )}
-
         {/* Si es para subir un vídeo */}
         {subtype === "video" && (
           <div className="mt-4">

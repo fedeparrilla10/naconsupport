@@ -49,12 +49,14 @@ export const questions = [
     id: 5,
     category: "general",
     type: "select_product",
+    message: "Consulta General",
     question: "¿Sobre qué producto quiere hacer su consulta?",
     options: { nextId: 17, icon: "/naconsupport/continue.svg" },
   },
   {
     id: 6,
     category: "warranty",
+    message: "Garantía de Producto",
     type: "select_product",
     question: "¿Sobre qué producto quiere gestionar su garantía?",
     options: { nextId: 8, icon: "/naconsupport/continue.svg" },
@@ -71,8 +73,7 @@ export const questions = [
     id: 8,
     category: "warranty",
     type: "select_store",
-    message:
-      "Gracias. Este es su producto sobre el que vamos a gestionar la garantía.",
+    message: "Garantía de producto",
     question: "¿En qué establecimiento adquirió este producto?",
     options: {
       noSatNextId: 9,
@@ -92,8 +93,7 @@ export const questions = [
     id: 10,
     category: "warranty",
     type: "select_date",
-    message:
-      "Gracias por identificar su producto y la tienda dónde lo ha adquirido.",
+    message: "Garantía de producto",
     question: "¿Cuál fue la fecha en la que compró el producto?",
     options: {
       invalidDateNextId: 11,
@@ -115,7 +115,8 @@ export const questions = [
     category: "warranty",
     type: "file",
     subtype: "ticket",
-    message:
+    message: "Garantía de producto",
+    question:
       "Por favor, adjunte una imagen del ticket de su compra e inserte el número del mismo.",
     options: [
       {
@@ -135,7 +136,8 @@ export const questions = [
     id: 13,
     category: "warranty",
     type: "picture_files",
-    message: "Por favor, adjunte como máximo 5 fotografías del producto.",
+    message: "Garantía de producto",
+    question: "Por favor, adjunte como máximo 5 fotografías del producto.",
     options: [
       {
         text: "No tengo fotos",
@@ -155,7 +157,8 @@ export const questions = [
     category: "warranty",
     type: "file",
     subtype: "video",
-    message:
+    message: "Garantía de producto",
+    question:
       "Por favor, adjunte un vídeo de producto funcionando incorrectamente. Es importante que podamos ver claramente el fallo que presenta.",
     options: [
       {
@@ -175,6 +178,7 @@ export const questions = [
     id: 15,
     category: "warranty",
     type: "warranty_form",
+    message: "Garantía de producto",
     question: "Necesitamos que nos indique las respuestas a estas preguntas:",
     options: {
       invalidNextId: 11,
@@ -195,6 +199,7 @@ export const questions = [
     id: 17,
     category: "general",
     type: "faq",
+    message: "Consulta General",
     question: "Manuales & Enlaces de Interés",
   },
   {

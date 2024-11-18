@@ -3,7 +3,7 @@ import { RadioGroup, Radio, FormControlLabel, Typography } from "@mui/material";
 import Button from "./Button";
 import useUserData from "../store/useUserData";
 
-const WarrantyForm = ({ question, options, handleOptionSelect }) => {
+const WarrantyForm = ({ message, question, options, handleOptionSelect }) => {
   const updateProductFormData = useUserData(
     (state) => state.updateProductFormData
   );
@@ -25,14 +25,12 @@ const WarrantyForm = ({ question, options, handleOptionSelect }) => {
 
   return (
     <div className="flex flex-col items-center justify-center w-full gap-4">
-      <img
-        src="/naconsupport/questionmark.svg"
-        alt="Realizar una consulta"
-        width={40}
-        height={40}
-        className="hidden md:block"
-      />
-      <h3 className="text-xl">{question}</h3>
+      <div className="flex flex-col items-center pb-4">
+        <p className="text-center md:text-start px-8 uppercase text-lg font-semibold">
+          {message}
+        </p>
+        <h3 className="text-2xl text-center md:text-start">{question}</h3>
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col items-center justify-around gap-3 md:gap-4"

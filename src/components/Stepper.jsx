@@ -32,7 +32,11 @@ const Stepper = ({
         />
       )}
       {type === "faq" && (
-        <FAQ question={question} handleOptionSelect={handleOptionSelect} />
+        <FAQ
+          message={message}
+          question={question}
+          handleOptionSelect={handleOptionSelect}
+        />
       )}
       {type === "form" && (
         <Form
@@ -45,6 +49,7 @@ const Stepper = ({
       )}
       {type === "warranty_form" && (
         <WarrantyForm
+          message={message}
           question={question}
           options={options}
           handleOptionSelect={handleOptionSelect}
@@ -52,6 +57,7 @@ const Stepper = ({
       )}
       {type === "select_product" && (
         <SelectProduct
+          message={message}
           question={question}
           options={options}
           handleOptionSelect={handleOptionSelect}

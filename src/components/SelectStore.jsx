@@ -4,8 +4,7 @@ import useRetailStore from "../store/useRetailStore";
 import Button from "./Button";
 import { stores } from "../data/stores";
 
-const SelectStore = ({ question, options, handleOptionSelect }) => {
-  const product = useProductStore((state) => state.selectedProduct);
+const SelectStore = ({ message, question, options, handleOptionSelect }) => {
   const selectedStore = useRetailStore((state) => state.selectedStore);
   const updateStore = useRetailStore((state) => state.updateStore);
   const selectedRetail = useRetailStore((state) => state.selectedRetail);
@@ -21,7 +20,12 @@ const SelectStore = ({ question, options, handleOptionSelect }) => {
 
   return (
     <section className="flex flex-col items-center justify-center w-full gap-4">
-      <h3 className="text-2xl text-center md:text-start">{question}</h3>
+      <div className="flex flex-col items-center pb-4">
+        <p className="text-center md:text-start px-8 uppercase text-lg font-semibold">
+          {message}
+        </p>
+        <h3 className="text-2xl text-center md:text-start">{question}</h3>
+      </div>
       <Autocomplete
         options={stores}
         getOptionLabel={(option) => option.name}

@@ -30,7 +30,7 @@ const Form = ({
         <p className="text-center md:text-start px-8 uppercase text-lg font-semibold">
           {message}
         </p>
-        <h3 className="text-2xl">{question}</h3>
+        <h3 className="text-2xl text-center md:text-start">{question}</h3>
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}

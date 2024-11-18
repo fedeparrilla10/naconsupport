@@ -19,7 +19,12 @@ const SelectDate = ({ message, question, options, handleOptionSelect }) => {
 
   return (
     <section className="flex flex-col items-center justify-center w-full gap-4">
-      <h3 className="text-2xl text-center md:text-start">{question}</h3>
+      <div className="flex flex-col items-center pb-4">
+        <p className="text-center md:text-start px-8 uppercase text-lg font-semibold">
+          {message}
+        </p>
+        <h3 className="text-2xl text-center md:text-start">{question}</h3>
+      </div>
       <div className="flex flex-col items-center gap-4">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
@@ -34,7 +39,7 @@ const SelectDate = ({ message, question, options, handleOptionSelect }) => {
             }}
           />
         </LocalizationProvider>
-        <p className="pt-2 md:pt-1 md:w-1/2">
+        <p className="pt-2 md:pt-4 md:w-1/2">
           Recuerde que todas las garantías tienen una fecha de caducidad de tres
           años. Si el producto fue adquirido antes de ese intervalo de tiempo,
           no podrá solicitarla.

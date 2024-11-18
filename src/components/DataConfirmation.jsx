@@ -25,18 +25,18 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
 
   return (
     <section className="flex flex-col items-center justify-center w-full pb-12">
-      <div className="flex flex-col items-center bg-white border-2 border-red-500 shadow-lg p-8 w-full text-black gap-10 mb-10">
+      <div className="flex flex-col items-center bg-white border-2 border-red-500 shadow-lg p-8 w-full text-black gap-5 md:gap-10 mb-10">
         <div className="flex flex-col items-center">
           <img
             src="/naconsupport/naconblack.png"
             alt="Nacon Support"
             className="object-cover w-1/3"
           />
-          <h3 className="uppercase text-xl md:text-2xl font-bold text-center underline underline-offset-8">
+          <h3 className="uppercase text-xl md:text-2xl font-bold text-center underline underline-offset-8 pt-4">
             Confirmación Final de Datos
           </h3>
 
-          <p className="text-center text-sm md:text-base pt-4 pb-8">
+          <p className="text-center text-sm md:text-base pt-4 pb-2 md:pb-8">
             Estás solicitando, con fecha de hoy {todaysDate}, la garantía de tu
             producto <span className="font-semibold">{product.name}</span>.
             <br />
@@ -47,7 +47,7 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
 
         <div className="flex flex-col w-full gap-6">
           <div className="flex w-full flex-col md:flex-row md:justify-around">
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 text-center md:text-start">
               <div>
                 <p className="font-bold underline underline-offset-4">
                   Información Personal
@@ -56,7 +56,7 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
                   <strong>• Nombre:</strong> {contactFormData.name}
                 </div>
                 <div>
-                  <strong>• Correo Electrónico:</strong> {contactFormData.email}
+                  <strong>• Email:</strong> {contactFormData.email}
                 </div>
                 <div>
                   <strong>• Teléfono:</strong> {contactFormData.phone}
@@ -83,29 +83,14 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
                 <p className="font-bold underline underline-offset-4">
                   Declaraciones:
                 </p>
-                <div>
-                  • El producto <span className="font-bold">no se mojó.</span>
-                </div>
-                <div>
-                  • El producto{" "}
-                  <span className="font-bold">no está dañado ni golpeado.</span>
-                </div>
-                <div>
-                  • El producto{" "}
-                  <span className="font-bold">
-                    no fue manipulado por ningún animal.
-                  </span>
-                </div>
-                <div>
-                  • El producto está{" "}
-                  <span className="font-bold">
-                    actualizado a la última versión.
-                  </span>
-                </div>
+                <div>• El producto no se mojó.</div>
+                <div>• El producto no está dañado ni golpeado.</div>
+                <div>• El producto no fue manipulado por ningún animal.</div>
+                <div>• El producto está actualizado a la última versión.</div>
               </div>
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 pt-6 md:pt-auto">
               <p className="font-bold text-center">Ticket Nro.: {userTicket}</p>
               <img
                 src={URL.createObjectURL(userMedia.ticket)}
@@ -137,12 +122,12 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
           </div>
 
           <div className="flex flex-col items-center w-full gap-4 pt-12">
-            <div className="flex flex-col md:flex-row items-center justify-around">
-              <p className="w-1/2 pt-10">
-                Declaro oficialmente que toda la información presentada es la
-                correcta. Entiendo que no será posible gestionar mi garantía si
-                alguno de estos datos son falsos o las imágenes y el vídeo no se
-                ven con claridad.
+            <div className="flex flex-col md:flex-row items-center justify-around gap-8 md:gap-2">
+              <p className="w-full md:w-1/2 pt-10">
+                Declaro oficialmente que toda la información presentada a NACON
+                es la correcta. Entiendo que no será posible gestionar mi
+                garantía si alguno de estos datos son falsos o las imágenes y el
+                vídeo no se ven con claridad.
               </p>
               <div className="border border-red-500 rounded-lg w-full md:w-1/3">
                 <h4 className="text-center font-semibold mb-2">Firma</h4>
@@ -153,7 +138,7 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
                     maxWidth: 1,
                   }}
                 />
-                <div className="flex flex-col md:flex-row gap-8">
+                <div className="flex gap-1">
                   <button
                     onClick={clearSignature}
                     className="mt-4 w-full bg-red-500 text-white py-1 px-2 rounded-lg hover:bg-red-600 transition duration-300"

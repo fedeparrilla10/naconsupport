@@ -9,6 +9,7 @@ import EndMessage from "./EndMessage";
 import EndProducts from "./EndProducts";
 import UploadFile from "./UploadFile";
 import UploadImages from "./UploadImages";
+import DataConfirmation from "./DataConfirmation";
 
 const Stepper = ({
   type,
@@ -95,6 +96,14 @@ const Stepper = ({
       )}
       {type === "picture_files" && (
         <UploadImages
+          message={message}
+          question={question}
+          options={options}
+          handleOptionSelect={handleOptionSelect}
+        />
+      )}
+      {type === "data_confirmation" && (
+        <DataConfirmation
           message={message}
           question={question}
           options={options}

@@ -2,11 +2,12 @@ import { useState } from "react";
 import { MuiFileInput } from "mui-file-input";
 import { TextField } from "@mui/material";
 import { Button as MUIButton } from "@mui/material";
+import useUserData from "../store/useUserData";
 import Button from "./Button";
 
 const UploadImages = ({ message, question, options, handleOptionSelect }) => {
+  const updateUserMedia = useUserData((state) => state.updateUserMedia);
   const [images, setImages] = useState([]);
-  console.log("🚀 ~ UploadImages ~ images:", images);
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
 
@@ -14,13 +15,18 @@ const UploadImages = ({ message, question, options, handleOptionSelect }) => {
     setFile(newFile);
   };
 
-  const handleSubmit = () => {
+  const handleUpload = () => {
     if (file && images.length < 5) {
       setImages([...images, file]);
       setFile(null);
     } else if (images.length === 5) {
       setError("Solo puedes subir 5 imágenes");
     }
+  };
+
+  const handleSubmit = (nextId) => {
+    updateUserMedia("images", images);
+    handleOptionSelect(nextId);
   };
 
   return (
@@ -36,7 +42,7 @@ const UploadImages = ({ message, question, options, handleOptionSelect }) => {
             placeholder="Click para subir una imagen"
           />
           <MUIButton
-            onClick={handleSubmit}
+            onClick={handleUpload}
             variant="contained"
             size="small"
             disabled={!file}
@@ -70,7 +76,7 @@ const UploadImages = ({ message, question, options, handleOptionSelect }) => {
             key={option.nextId}
             isDisabled={option.hasCondition && images.length === 0}
             content={option.text}
-            onClick={() => handleOptionSelect(option.nextId)}
+            onClick={() => handleSubmit(option.nextId)}
           />
         ))}
       </div>

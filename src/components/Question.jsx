@@ -2,7 +2,7 @@ import Button from "./Button";
 
 const Question = ({ question, options, handleOptionSelect }) => {
   return (
-    <div className="flex flex-col items-center justify-center w-full gap-8">
+    <section className="flex flex-col items-center justify-center w-full gap-8">
       <img
         src="/naconsupport/questionmark.svg"
         alt="Realizar una consulta"
@@ -21,7 +21,7 @@ const Question = ({ question, options, handleOptionSelect }) => {
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -98,11 +98,11 @@ export const questions = [
     message:
       "Por favor, adjunte una imagen del ticket de su compra e inserte el número del mismo.",
     options: [
-      { text: "Continuar", nextId: 13, hasCondition: true },
       {
         text: "No tengo ticket",
         nextId: 11,
       },
+      { text: "Continuar", nextId: 13, hasCondition: true },
     ],
   },
   {
@@ -111,11 +111,11 @@ export const questions = [
     type: "picture_files",
     message: "Por favor, adjunte como máximo 5 fotografías del producto.",
     options: [
-      { text: "Continuar", nextId: 14, hasCondition: true },
       {
         text: "No tengo fotos",
         nextId: 11,
       },
+      { text: "Continuar", nextId: 14, hasCondition: true },
     ],
   },
   {
@@ -126,11 +126,11 @@ export const questions = [
     message:
       "Por favor, adjunte un vídeo de producto funcionando incorrectamente. Es importante que podamos ver claramente el fallo que presenta.",
     options: [
-      { text: "Continuar", nextId: 15, hasCondition: true },
       {
         text: "No tengo vídeo",
         nextId: 11,
       },
+      { text: "Continuar", nextId: 15, hasCondition: true },
     ],
   },
   {
@@ -142,7 +142,12 @@ export const questions = [
   },
   {
     id: 16,
+    category: "warranty",
+    type: "data_confirmation",
+    message:
+      "Necesitamos que nos confirmes los datos que nos has indicado anteriormente. Es importante que sean correctos para poder gestionar tu garantía.",
   },
+
   {
     id: 17,
     category: "general",

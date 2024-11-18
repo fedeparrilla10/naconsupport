@@ -1,7 +1,11 @@
 import { useForm } from "react-hook-form";
 import Button from "./Button";
+import useUserData from "../store/useUserData";
 
 const Form = ({ question, options, freeWriting, handleOptionSelect }) => {
+  const updateContactFormData = useUserData(
+    (state) => state.updateContactFormData
+  );
   const {
     register,
     formState: { errors },
@@ -9,6 +13,7 @@ const Form = ({ question, options, freeWriting, handleOptionSelect }) => {
   } = useForm();
   const onSubmit = (data) => {
     if (data) {
+      updateContactFormData(data);
       handleOptionSelect(options.nextId);
     }
   };

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MuiFileInput } from "mui-file-input";
 import { TextField } from "@mui/material";
+import useUserData from "../store/useUserData";
 import Button from "./Button";
 
 const UploadFile = ({
@@ -12,9 +13,21 @@ const UploadFile = ({
 }) => {
   const [file, setFile] = useState(null);
   const [ticketNumber, setTicketNumber] = useState("");
+  const userTicket = useUserData((state) => state.userTicket);
+  const updateUserTicket = useUserData((state) => state.updateUserTicket);
+  const updateUserMedia = useUserData((state) => state.updateUserMedia);
 
   const handleChange = (newFile) => {
     setFile(newFile);
+  };
+
+  const handleSubmit = (nextId) => {
+    if (file) {
+      subtype === "ticket" && updateUserTicket(ticketNumber);
+      updateUserMedia(subtype, file);
+      handleOptionSelect(nextId);
+    }
+    handleOptionSelect(nextId);
   };
 
   return (
@@ -60,7 +73,7 @@ const UploadFile = ({
               (!file || (subtype === "ticket" && !ticketNumber))
             }
             content={option.text}
-            onClick={() => handleOptionSelect(option.nextId)}
+            onClick={() => handleSubmit(option.nextId)}
           />
         ))}
       </div>

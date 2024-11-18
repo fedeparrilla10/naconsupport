@@ -3,13 +3,19 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import useUserData from "../store/useUserData";
 import Button from "./Button";
 
 const SelectDate = ({ message, question, options, handleOptionSelect }) => {
-  console.log("🚀 ~ SelectDate ~ options:", options);
+  const updateSelectedDate = useUserData((state) => state.updateSelectedDate);
   const [date, setDate] = useState(dayjs());
   const minDate = dayjs().subtract(3, "year");
   const isValidDate = date < minDate;
+
+  const handleSubmit = (nextId) => {
+    updateSelectedDate(date);
+    handleOptionSelect(nextId);
+  };
 
   return (
     <section className="flex flex-col items-center justify-center w-full gap-4">
@@ -45,7 +51,7 @@ const SelectDate = ({ message, question, options, handleOptionSelect }) => {
         <Button
           content="Continuar"
           onClick={() =>
-            handleOptionSelect(
+            handleSubmit(
               !isValidDate ? options.validDateNextId : options.invalidDateNextId
             )
           }

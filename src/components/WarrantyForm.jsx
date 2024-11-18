@@ -1,8 +1,12 @@
 import { useForm, Controller } from "react-hook-form";
 import { RadioGroup, Radio, FormControlLabel, Typography } from "@mui/material";
 import Button from "./Button";
+import useUserData from "../store/useUserData";
 
 const WarrantyForm = ({ question, options, handleOptionSelect }) => {
+  const updateProductFormData = useUserData(
+    (state) => state.updateProductFormData
+  );
   const { control, handleSubmit } = useForm({
     defaultValues: {
       isWet: "",
@@ -13,6 +17,7 @@ const WarrantyForm = ({ question, options, handleOptionSelect }) => {
   });
 
   const onSubmit = (data) => {
+    updateProductFormData(data);
     Object.values(data).includes("yes")
       ? handleOptionSelect(options.invalidNextId)
       : handleOptionSelect(options.validNextId);

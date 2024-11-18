@@ -32,6 +32,7 @@ export const questions = [
     category: "warranty",
     type: "form",
     freeWriting: false,
+    message: "Garantía de Producto",
     question: "Por favor, introduzca sus datos para poder contactar con usted:",
     options: { nextId: 6, icon: "/naconsupport/continue.svg" },
   },

@@ -26,7 +26,7 @@ const Form = ({
 
   return (
     <div className="flex flex-col items-center justify-center w-full gap-4 pb-12">
-      <div>
+      <div className="flex flex-col items-center">
         <p className="text-center md:text-start px-8 uppercase text-lg font-semibold">
           {message}
         </p>

@@ -14,6 +14,7 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
   const userMedia = useUserData((state) => state.userMedia);
   const product = useProductStore((state) => state.selectedProduct);
   const store = useRetailStore((state) => state.selectedStore);
+  const retail = useRetailStore((state) => state.selectedRetail);
   const todaysDate = dayjs().format("DD/MM/YYYY");
   const signaturePadRef = useRef(null);
   const clearSignature = () => {
@@ -71,7 +72,7 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
                   <strong>• Producto:</strong> {product.name}
                 </div>
                 <div>
-                  <strong>• Tienda:</strong> {store.name}
+                  <strong>• Tienda:</strong> {store.name} - {retail.name}
                 </div>
                 <div>
                   <strong>• Fecha de Compra:</strong>{" "}

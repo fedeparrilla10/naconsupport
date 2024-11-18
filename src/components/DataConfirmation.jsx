@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import dayjs from "dayjs";
 import SignaturePad from "react-signature-pad-wrapper";
 import useProductStore from "../store/useProductStore";
@@ -7,6 +7,7 @@ import useUserData from "../store/useUserData";
 import Button from "./Button";
 
 const DataConfirmation = ({ question, options, handleOptionSelect }) => {
+  const [isSigned, setIsSigned] = useState(false);
   const contactFormData = useUserData((state) => state.contactFormData);
   const selectedDate = useUserData((state) => state.selectedDate);
   const userTicket = useUserData((state) => state.userTicket);
@@ -14,17 +15,17 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
   const product = useProductStore((state) => state.selectedProduct);
   const store = useRetailStore((state) => state.selectedStore);
   const todaysDate = dayjs().format("DD/MM/YYYY");
-
   const signaturePadRef = useRef(null);
   const clearSignature = () => {
     if (signaturePadRef.current) {
       signaturePadRef.current.clear();
+      setIsSigned(false);
     }
   };
 
   return (
     <section className="flex flex-col items-center justify-center w-full pb-12">
-      <div className="flex flex-col items-center bg-white border-2 border-red-500 shadow-lg p-8 w-full max-w-4xl text-black gap-10">
+      <div className="flex flex-col items-center bg-white border-2 border-red-500 shadow-lg p-8 w-full text-black gap-10 mb-10">
         <div className="flex flex-col items-center">
           <img
             src="/naconsupport/naconblack.png"
@@ -35,9 +36,10 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
             Confirmación Final de Datos
           </h3>
 
-          <p className="text-center text-sm md:text-base pt-4">
+          <p className="text-center text-sm md:text-base pt-4 pb-8">
             Estás solicitando, con fecha de hoy {todaysDate}, la garantía de tu
             producto <span className="font-semibold">{product.name}</span>.
+            <br />
             Necesitamos que nos confirmes que toda la información enviada es
             válida y completamente verídica.
           </p>
@@ -129,7 +131,7 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
 
           <div className="pt-6 flex flex-col items-center gap-4">
             <p className="font-bold">Vídeo del Producto</p>
-            <video className="w-3/4 rounded-lg object-cover" controls>
+            <video className="w-3/4 xl:w-2/4 rounded-lg object-cover" controls>
               <source src={URL.createObjectURL(userMedia.video)} />
             </video>
           </div>
@@ -151,17 +153,26 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
                     maxWidth: 1,
                   }}
                 />
-                <button
-                  onClick={clearSignature}
-                  className="mt-4 w-full bg-red-500 text-white py-1 px-2 rounded-lg hover:bg-red-600 transition duration-300"
-                >
-                  Limpiar
-                </button>
+                <div className="flex flex-col md:flex-row gap-8">
+                  <button
+                    onClick={clearSignature}
+                    className="mt-4 w-full bg-red-500 text-white py-1 px-2 rounded-lg hover:bg-red-600 transition duration-300"
+                  >
+                    Limpiar
+                  </button>
+                  <button
+                    onClick={() => setIsSigned(true)}
+                    className="mt-4 w-full bg-green-800 text-white py-1 px-2 rounded-lg hover:bg-green-900 transition duration-300"
+                  >
+                    Firmar
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <Button content="Confirmar y continuar" isDisabled={!isSigned} />
     </section>
   );
 };

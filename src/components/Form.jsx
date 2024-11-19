@@ -7,6 +7,7 @@ const Form = ({
   question,
   options,
   freeWriting,
+  aproxTime,
   handleOptionSelect,
 }) => {
   const updateContactFormData = useUserData(
@@ -143,6 +144,10 @@ const Form = ({
           <p className="text-xs md:text-sm text-red-400 text-center">
             Debe aceptar los términos y condiciones y la política de privacidad
           </p>
+        )}
+
+        {aproxTime && (
+          <p className="text-xs md:text-sm text-center">{aproxTime}</p>
         )}
 
         <div className="mt-4">

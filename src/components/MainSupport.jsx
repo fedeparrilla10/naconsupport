@@ -31,6 +31,7 @@ const MainSupport = () => {
           options={currentQuestion.options || []}
           handleOptionSelect={handleOptionSelect}
           freeWriting={currentQuestion.freeWriting}
+          aproxTime={currentQuestion.aproxTime}
           storeData={currentQuestion.storeData}
         />
       )}

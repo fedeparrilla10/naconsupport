@@ -18,6 +18,7 @@ const Stepper = ({
   message,
   options,
   freeWriting,
+  aproxTime,
   storeData,
   handleOptionSelect,
 }) => {
@@ -44,6 +45,7 @@ const Stepper = ({
           question={question}
           options={options}
           handleOptionSelect={handleOptionSelect}
+          aproxTime={aproxTime}
           freeWriting={freeWriting}
         />
       )}

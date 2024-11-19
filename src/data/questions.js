@@ -34,6 +34,8 @@ export const questions = [
     freeWriting: false,
     message: "Garantía de Producto",
     question: "Por favor, introduzca sus datos para poder contactar con usted:",
+    aproxTime:
+      "Completar este proceso le llevará aproximadamente diez minutos.",
     options: { nextId: 6, icon: "/naconsupport/continue.svg" },
   },
   {

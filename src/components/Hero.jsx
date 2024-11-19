@@ -3,7 +3,7 @@ const Hero = ({ handleOptionSelect }) => {
     <main className="flex flex-col items-center gap-8">
       <div>
         <p className="text-center md:text-start px-8 uppercase text-lg font-semibold pt-4">
-          Gracias por contactar con el servicio de ATENCIÓN AL CLIENTE de NACON.
+          Gracias por contactar con el servicio de atención al cliente de Nacon
         </p>
         <h2 className="text-center text-wrap text-2xl px-2 md:text-4xl tracking-wide pt-8 md:pt-2">
           ¿Cómo podemos ayudarte?

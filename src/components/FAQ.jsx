@@ -17,7 +17,7 @@ const FAQ = ({ message, question, handleOptionSelect }) => {
         <div className="flex flex-col flex-wrap justify-center items-center md:flex-row gap-6">
           {PDFs.map((faq) => {
             return (
-              <a href={faq.url} target="_blank">
+              <a href={faq.url} key={faq.name} target="_blank">
                 <button
                   className="border-2 border-gray-50 w-[200px] md:w-40 md:h-40 grid grid-cols-1 grid-rows-2 place-items-center gap-8 cursor-pointer rounded-lg hover:bg-gray-700 hover:text-white 
           transition duration-300 ease-in-out transform hover:scale-105 py-8 px-2"
@@ -43,14 +43,12 @@ const FAQ = ({ message, question, handleOptionSelect }) => {
                 </h3>
 
                 <iframe
-                  width="560"
-                  height="315"
+                  className="w-[360px] h-[225px] md:w-[560px] md:h-[315px]"
                   src={video.url}
                   title="YouTube video player"
-                  frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullscreen
                 ></iframe>
               </div>
             );

@@ -53,7 +53,6 @@ const SelectStore = ({ message, question, options, handleOptionSelect }) => {
           style={{ width: 300 }}
           value={selectedRetail || null}
           onChange={(event, newValue) => handleRetail(event, newValue)}
-          onClose={() => updateRetail(null)}
           renderInput={(params) => (
             <TextField
               {...params}

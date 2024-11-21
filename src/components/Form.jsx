@@ -131,6 +131,17 @@ const Form = ({
               </a>
             </label>
           </div>
+
+          <div className="flex items-center justify-center gap-2">
+            <input
+              {...register("promotions")}
+              type="checkbox"
+              className="h-4 w-4 text-blue-600"
+            />
+            <label htmlFor="privacy" className="text-sm">
+              Acepto recibir ofertas y promociones NACON.
+            </label>
+          </div>
         </div>
 
         {(errors.name || errors.email || errors.phone) && (

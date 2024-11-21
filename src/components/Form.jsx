@@ -158,7 +158,10 @@ const Form = ({
         )}
 
         {aproxTime && (
-          <p className="text-xs md:text-sm text-center">{aproxTime}</p>
+          <p className="text-xs md:text-sm text-center md:w-3/4">
+            <span className="text-red-500 font-semibold">¡IMPORTANTE!</span>{" "}
+            {aproxTime}
+          </p>
         )}
 
         <div className="mt-4">

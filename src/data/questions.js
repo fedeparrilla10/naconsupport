@@ -35,7 +35,7 @@ export const questions = [
     message: "Garantía de Producto",
     question: "Por favor, introduzca sus datos para poder contactar con usted:",
     aproxTime:
-      "Completar este proceso le llevará aproximadamente diez minutos.",
+      "Completar este proceso le llevará aproximadamente diez minutos. Por favor, asegúrese de tener a mano la siguiente documentación: ticket, imágenes del producto y vídeo del producto fallando.",
     options: { nextId: 6, icon: "/naconsupport/continue.svg" },
   },
   {

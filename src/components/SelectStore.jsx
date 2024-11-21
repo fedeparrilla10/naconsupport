@@ -1,5 +1,4 @@
 import { Autocomplete, TextField } from "@mui/material";
-import useProductStore from "../store/useProductStore";
 import useRetailStore from "../store/useRetailStore";
 import Button from "./Button";
 import { stores } from "../data/stores";

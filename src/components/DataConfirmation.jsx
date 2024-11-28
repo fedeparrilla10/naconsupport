@@ -5,22 +5,86 @@ import useProductStore from "../store/useProductStore";
 import useRetailStore from "../store/useRetailStore";
 import useUserData from "../store/useUserData";
 import Button from "./Button";
+import { warrantyApi } from "../api/warranty";
 
-const DataConfirmation = ({ question, options, handleOptionSelect }) => {
+const DataConfirmation = ({ options, handleOptionSelect }) => {
   const [isSigned, setIsSigned] = useState(false);
+  const [signature, setSignature] = useState(null);
   const contactFormData = useUserData((state) => state.contactFormData);
   const selectedDate = useUserData((state) => state.selectedDate);
   const userTicket = useUserData((state) => state.userTicket);
   const userMedia = useUserData((state) => state.userMedia);
+  console.log("🚀 ~ DataConfirmation ~ userMedia:", userMedia);
   const product = useProductStore((state) => state.selectedProduct);
+  const variant = useProductStore((state) => state.selectedVariant);
   const store = useRetailStore((state) => state.selectedStore);
   const retail = useRetailStore((state) => state.selectedRetail);
   const todaysDate = dayjs().format("DD/MM/YYYY");
   const signaturePadRef = useRef(null);
+
+  const handleSaveSignature = () => {
+    if (signaturePadRef.current) {
+      const signatureData = signaturePadRef.current.toDataURL();
+      setSignature(signatureData);
+      setIsSigned(true);
+    }
+  };
+
+  console.log("hola" + userMedia.images[0]);
+
   const clearSignature = () => {
     if (signaturePadRef.current) {
       signaturePadRef.current.clear();
       setIsSigned(false);
+    }
+  };
+
+  const handleWarrantySubmit = async () => {
+    const formData = new FormData();
+
+    formData.append("name", contactFormData.name);
+    formData.append("phone", contactFormData.phone);
+    formData.append("email", contactFormData.email);
+    formData.append("establecimiento", store.name);
+    formData.append("buy_date", selectedDate.format("YYYY-MM-DD"));
+    formData.append("product_id", product.id);
+    formData.append("signature", signature);
+    formData.append("number_factura", userTicket);
+
+    if (userMedia.ticket && userMedia.ticket) {
+      formData.append("file_factura", userMedia.ticket);
+    }
+    console.log("🚀 ~ handleWarrantySubmit ~ userMedia:", userMedia);
+
+    if (userMedia.images && userMedia.images[0]) {
+      formData.append("product_image_1", userMedia.images[0]);
+    }
+
+    if (userMedia.images && userMedia.images[1]) {
+      formData.append("product_image_2", userMedia.images[1]);
+    }
+
+    if (userMedia.images && userMedia.images[2]) {
+      formData.append("product_image_3", userMedia.images[2]);
+    }
+
+    if (userMedia.images && userMedia.images[3]) {
+      formData.append("product_image_4", userMedia.images[3]);
+    }
+
+    if (userMedia.images && userMedia.images[4]) {
+      formData.append("product_image_5", userMedia.images[4]);
+    }
+
+    if (userMedia.video && userMedia.video) {
+      formData.append("file_video", userMedia.video);
+    }
+
+    try {
+      await warrantyApi.storeWarranty(formData);
+      // handleOptionSelect(options.nextId);
+    } catch (error) {
+      console.error("Error al hacer la solicitud:", error);
     }
   };
 
@@ -39,7 +103,8 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
 
           <p className="text-center text-sm md:text-base pt-4 pb-2 md:pb-8">
             Estás solicitando, con fecha de hoy {todaysDate}, la garantía de tu
-            producto <span className="font-semibold">{product.name}</span>.
+            producto <span className="font-semibold">{product.name}</span>
+            .
             <br />
             Necesitamos que nos confirmes que toda la información enviada es
             válida y completamente verídica.
@@ -69,7 +134,8 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
                   Información del Producto:
                 </p>
                 <div>
-                  <strong>• Producto:</strong> {product.name}
+                  <strong>• Producto:</strong> {product.name}{" "}
+                  {variant && `- ${variant.name}`}
                 </div>
                 <div>
                   <strong>• Tienda:</strong> {store.name} - {retail.name}
@@ -133,6 +199,7 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
                 garantía si alguno de estos datos son falsos o las imágenes y el
                 vídeo no se ven con claridad.
               </p>
+
               <div className="border border-red-500 rounded-lg w-full md:w-1/3">
                 <h4 className="text-center font-semibold mb-2">Firma</h4>
                 <SignaturePad
@@ -150,7 +217,7 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
                     Limpiar
                   </button>
                   <button
-                    onClick={() => setIsSigned(true)}
+                    onClick={handleSaveSignature}
                     className="mt-4 w-full bg-green-800 text-white py-1 px-2 rounded-lg hover:bg-green-900 transition duration-300"
                   >
                     Firmar
@@ -165,7 +232,7 @@ const DataConfirmation = ({ question, options, handleOptionSelect }) => {
         content="Confirmar y continuar"
         isDisabled={!isSigned}
         icon={options.icon}
-        onClick={() => handleOptionSelect(options.nextId)}
+        onClick={handleWarrantySubmit}
       />
     </section>
   );

@@ -115,7 +115,6 @@ const Stepper = ({
       {type === "data_confirmation" && (
         <DataConfirmation
           message={message}
-          question={question}
           options={options}
           handleOptionSelect={handleOptionSelect}
         />

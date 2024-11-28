@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import Button from "./Button";
 import useUserData from "../store/useUserData";
+import { generalQuestionApi } from "../api/general";
 
 const Form = ({
   message,
@@ -18,11 +19,26 @@ const Form = ({
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (data) {
       updateContactFormData(data);
-      handleOptionSelect(options.nextId);
+
+      if (freeWriting) {
+        try {
+          await generalQuestionApi.storeGeneralQuestion({
+            name: data.name,
+            phone: data.phone,
+            email: data.email,
+            message: data.message,
+          });
+          handleOptionSelect(options.nextId);
+        } catch (error) {
+          console.error("Error al hacer la solicitud:", error);
+        }
+      }
     }
+
+    handleOptionSelect(options.nextId);
   };
 
   return (
@@ -169,6 +185,7 @@ const Form = ({
             type="submit"
             content="Enviar Formulario"
             icon={options.icon}
+            // onClick={freeWriting && handleGeneralQuestionSubmit}
           />
         </div>
       </form>

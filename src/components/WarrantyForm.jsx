@@ -18,9 +18,16 @@ const WarrantyForm = ({ message, question, options, handleOptionSelect }) => {
 
   const onSubmit = (data) => {
     updateProductFormData(data);
-    Object.values(data).includes("yes")
-      ? handleOptionSelect(options.invalidNextId)
-      : handleOptionSelect(options.validNextId);
+
+    const isValid =
+      data.isWet === "no" &&
+      data.isDamaged === "no" &&
+      data.isManipulatedByAnimals === "no" &&
+      data.isUpdated === "yes";
+
+    isValid
+      ? handleOptionSelect(options.validNextId)
+      : handleOptionSelect(options.invalidNextId);
   };
 
   return (

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Autocomplete, TextField } from "@mui/material";
+import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import Button from "./Button";
 import useProductStore from "../store/useProductStore";
 import { products } from "../data/products";
@@ -7,11 +8,43 @@ import { products } from "../data/products";
 const SelectProduct = ({ message, question, options, handleOptionSelect }) => {
   const selectedProduct = useProductStore((state) => state.selectedProduct);
   const updateProduct = useProductStore((state) => state.updateProduct);
+  const selectedVariant = useProductStore((state) => state.selectedVariant);
+  const updateVariant = useProductStore((state) => state.updateVariant);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedProductName, setSelectedProductName] = useState(null);
+  const [selectedVariantName, setSelectedVariantName] = useState(null);
+  const [activeStep, setActiveStep] = useState(0);
+  const allProducts = products.map((product) => product.products).flat();
 
-  const handleProduct = (event, product) => {
-    updateProduct(product);
+  const handleAutocomplete = (event, product) => {
     setSelectedProductName(product.name);
+    updateProduct(product);
+
+    if (product.variants && product.variants.length > 0) {
+      setActiveStep(2);
+    }
+  };
+
+  const handlePrevStep = () => {
+    setActiveStep(0);
+  };
+
+  const handleCategory = (category) => {
+    setSelectedCategory(category);
+    setActiveStep(activeStep + 1);
+  };
+
+  const handleProduct = (product) => {
+    setSelectedProductName(product.name);
+    updateProduct(product);
+    product.variants &&
+      product.variants.length > 0 &&
+      setActiveStep(activeStep + 1);
+  };
+
+  const handleVariant = (variant) => {
+    setSelectedVariantName(variant.name);
+    updateVariant(variant);
   };
 
   return (
@@ -23,11 +56,11 @@ const SelectProduct = ({ message, question, options, handleOptionSelect }) => {
         <h3 className="text-2xl text-center md:text-start">{question}</h3>
       </div>
       <Autocomplete
-        options={products}
+        options={allProducts}
         getOptionLabel={(option) => option.name}
         style={{ width: 300, paddingTop: 8 }}
         value={selectedProduct || null}
-        onChange={(event, newValue) => handleProduct(event, newValue)}
+        onChange={(event, newValue) => handleAutocomplete(event, newValue)}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -47,39 +80,98 @@ const SelectProduct = ({ message, question, options, handleOptionSelect }) => {
           </li>
         )}
       />
-      <article className="flex flex-col md:flex-row items-center gap-3 pt-4">
-        {products.map((product) => {
-          return (
-            <div
-              key={product.name}
-              className="grid grid-cols-1 text-center"
-              onClick={(event) => handleProduct(event, product)}
-            >
-              <div
-                className={`bg-gray-300 rounded-xl py-4 px-2 ${
-                  selectedProductName === product.name
-                    ? "ring ring-blue-300"
-                    : ""
-                }`}
-              >
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-[300px] h-[300px] md:w-[150px] md:h-[150px] object-contain cursor-pointer"
-                />
-                <p className="pt-4 text-black">{product.name}</p>
-              </div>
-            </div>
-          );
-        })}
+      <article className="flex flex-col items-center pt-4">
+        <div
+          className={`${
+            activeStep === 0 && "opacity-0"
+          } flex flex-row items-center justify-center gap-2 cursor-pointer text-sm h-[1rem]`}
+          onClick={handlePrevStep}
+        >
+          <KeyboardReturnIcon />
+          <p className="pb-1.5">Ir Atrás</p>
+        </div>
+        <div className="flex flex-col md:flex-row items-center gap-3 pt-4">
+          {activeStep === 0 &&
+            products.map((category) => {
+              return (
+                <div
+                  key={category.name}
+                  className="grid grid-cols-1 text-center cursor-pointer"
+                  onClick={() => handleCategory(category)}
+                >
+                  <div className="bg-gray-300 rounded-xl py-4 px-2">
+                    <img
+                      src={category.image}
+                      alt={category.name}
+                      className="w-[300px] h-[300px] md:w-[150px] md:h-[150px] object-contain cursor-pointer"
+                    />
+                    <p className="pt-4 text-black">{category.name}</p>
+                  </div>
+                </div>
+              );
+            })}
+          {activeStep === 1 &&
+            selectedCategory.products.map((product) => {
+              return (
+                <div
+                  key={product.name}
+                  className="grid grid-cols-1 text-center cursor-pointer"
+                  onClick={() => handleProduct(product)}
+                >
+                  <div
+                    className={`bg-gray-300 rounded-xl py-4 px-2 ${
+                      selectedProductName === product.name &&
+                      "ring ring-blue-500"
+                    }`}
+                  >
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-[300px] h-[300px] md:w-[150px] md:h-[150px] object-contain cursor-pointer"
+                    />
+                    <p className="pt-4 text-black">{product.name}</p>
+                  </div>
+                </div>
+              );
+            })}
+          {activeStep === 2 &&
+            selectedProduct.variants.map((variant) => {
+              return (
+                <div
+                  key={variant.name}
+                  className="grid grid-cols-1 text-center cursor-pointer"
+                  onClick={() => handleVariant(variant)}
+                >
+                  <div
+                    className={`bg-gray-300 rounded-xl py-4 px-2 ${
+                      selectedVariantName === variant.name &&
+                      "ring ring-blue-500"
+                    }`}
+                  >
+                    <img
+                      src={variant.image}
+                      alt={variant.name}
+                      className="w-[300px] h-[300px] md:w-[150px] md:h-[150px] object-contain cursor-pointer"
+                    />
+                    <p className="pt-4 text-black">{variant.name}</p>
+                  </div>
+                </div>
+              );
+            })}
+        </div>
       </article>
       <div className="mt-4 mb-10">
         <Button
           content="Continuar"
-          isDisabled={!selectedProduct}
+          isDisabled={
+            selectedProduct?.variants.length > 0
+              ? !selectedVariant
+              : !selectedProduct
+          }
           icon={options.icon}
           onClick={() => handleOptionSelect(options.nextId)}
         />
+        {console.log("🚀 ~ SelectProduct ~ selectedProduct:", selectedProduct)}
       </div>
     </section>
   );

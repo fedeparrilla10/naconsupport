@@ -5,32 +5,31 @@ import useProductStore from "../store/useProductStore";
 import useRetailStore from "../store/useRetailStore";
 import useUserData from "../store/useUserData";
 import Button from "./Button";
+import dataURLtoFile from "../utils/dataURLtoFile";
 import { warrantyApi } from "../api/warranty";
 
 const DataConfirmation = ({ options, handleOptionSelect }) => {
   const [isSigned, setIsSigned] = useState(false);
   const [signature, setSignature] = useState(null);
+  const signaturePadRef = useRef(null);
   const contactFormData = useUserData((state) => state.contactFormData);
   const selectedDate = useUserData((state) => state.selectedDate);
   const userTicket = useUserData((state) => state.userTicket);
   const userMedia = useUserData((state) => state.userMedia);
-  console.log("🚀 ~ DataConfirmation ~ userMedia:", userMedia);
   const product = useProductStore((state) => state.selectedProduct);
   const variant = useProductStore((state) => state.selectedVariant);
   const store = useRetailStore((state) => state.selectedStore);
   const retail = useRetailStore((state) => state.selectedRetail);
   const todaysDate = dayjs().format("DD/MM/YYYY");
-  const signaturePadRef = useRef(null);
 
   const handleSaveSignature = () => {
     if (signaturePadRef.current) {
-      const signatureData = signaturePadRef.current.toDataURL();
-      setSignature(signatureData);
+      const signatureDataURL = signaturePadRef.current.toDataURL("image/png");
+      const file = dataURLtoFile(signatureDataURL, "signature.png");
+      setSignature(file);
       setIsSigned(true);
     }
   };
-
-  console.log("hola" + userMedia.images[0]);
 
   const clearSignature = () => {
     if (signaturePadRef.current) {
@@ -45,9 +44,13 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
     formData.append("name", contactFormData.name);
     formData.append("phone", contactFormData.phone);
     formData.append("email", contactFormData.email);
-    formData.append("establecimiento", store.name);
+    formData.append("establecimiento", store.name + " - " + retail.name);
     formData.append("buy_date", selectedDate.format("YYYY-MM-DD"));
     formData.append("product_id", product.id);
+    formData.append(
+      "product",
+      product.name + (variant ? ` - ${variant.name}` : "")
+    );
     formData.append("signature", signature);
     formData.append("number_factura", userTicket);
 

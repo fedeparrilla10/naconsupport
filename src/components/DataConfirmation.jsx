@@ -85,7 +85,7 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
 
     try {
       await warrantyApi.storeWarranty(formData);
-      // handleOptionSelect(options.nextId);
+      handleOptionSelect(options.nextId);
     } catch (error) {
       console.error("Error al hacer la solicitud:", error);
     }

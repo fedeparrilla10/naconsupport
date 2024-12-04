@@ -24,6 +24,8 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.1",
     "react-signature-pad-wrapper": "^4.0.4",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
     "zustand": "^5.0.1"
   },
   "devDependencies": {

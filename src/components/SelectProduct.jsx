@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Autocomplete, TextField } from "@mui/material";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
+import { useMediaQuery } from "@mui/material";
 import Button from "./Button";
 import useProductStore from "../store/useProductStore";
 import { products } from "../data/products";
+import { ProductSlider, VariantSlider } from "./NaconSlider";
 
 const SelectProduct = ({ message, question, options, handleOptionSelect }) => {
   const selectedProduct = useProductStore((state) => state.selectedProduct);
@@ -15,6 +17,7 @@ const SelectProduct = ({ message, question, options, handleOptionSelect }) => {
   const [selectedVariantName, setSelectedVariantName] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
   const allProducts = products.map((product) => product.products).flat();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const handleAutocomplete = (event, product) => {
     setSelectedProductName(product.name);
@@ -111,53 +114,80 @@ const SelectProduct = ({ message, question, options, handleOptionSelect }) => {
               );
             })}
           {activeStep === 1 &&
-            selectedCategory.products.map((product) => {
-              return (
-                <div
-                  key={product.name}
-                  className="grid grid-cols-1 text-center cursor-pointer"
-                  onClick={() => handleProduct(product)}
-                >
+            (isMobile ? (
+              selectedCategory.products.map((product) => {
+                return (
                   <div
-                    className={`bg-gray-300 rounded-xl py-4 px-2 ${
-                      selectedProductName === product.name &&
-                      "ring ring-blue-500"
-                    }`}
+                    key={product.name}
+                    className="grid grid-cols-1 text-center cursor-pointer"
+                    onClick={() => handleProduct(product)}
                   >
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-[300px] h-[300px] md:w-[150px] md:h-[150px] object-contain cursor-pointer"
-                    />
-                    <p className="pt-4 text-black">{product.name}</p>
+                    <div
+                      className={`bg-gray-300 rounded-xl py-4 px-2 ${
+                        selectedProductName === product.name &&
+                        "ring ring-blue-500"
+                      }`}
+                    >
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-[300px] h-[300px] md:w-[150px] md:h-[150px] object-contain cursor-pointer"
+                      />
+                      <p className="pt-4 text-black">{product.name}</p>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            ) : (
+              <section className="w-[800px]">
+                <ProductSlider
+                  data={selectedCategory.products}
+                  handleProduct={handleProduct}
+                  selectedProductName={selectedProductName}
+                />
+              </section>
+            ))}
           {activeStep === 2 &&
-            selectedProduct.variants.map((variant) => {
-              return (
-                <div
-                  key={variant.name}
-                  className="grid grid-cols-1 text-center cursor-pointer"
-                  onClick={() => handleVariant(variant)}
-                >
+            (isMobile || selectedProduct.variants.length < 4 ? (
+              selectedProduct.variants.map((variant) => {
+                return (
                   <div
-                    className={`bg-gray-300 rounded-xl py-4 px-2 ${
-                      selectedVariantName === variant.name &&
-                      "ring ring-blue-500"
-                    }`}
+                    key={variant.name}
+                    className="relative grid grid-cols-1 text-center cursor-pointer"
+                    onClick={() => handleVariant(variant)}
                   >
-                    <img
-                      src={variant.image}
-                      alt={variant.name}
-                      className="w-[300px] h-[300px] md:w-[150px] md:h-[150px] object-contain cursor-pointer"
-                    />
-                    <p className="pt-4 text-black">{variant.name}</p>
+                    <div
+                      className={`flex flex-col items-center justify-center bg-gray-300 rounded-xl py-4 px-2 w-[316px] h-[372px] md:w-[166px] md:h-[222px] ${
+                        selectedVariantName === variant.name &&
+                        "ring ring-blue-500"
+                      }`}
+                    >
+                      <img
+                        src={
+                          variant.platform
+                            ? `/naconsupport/products/platforms/${variant.platform}.svg`
+                            : selectedProduct.platform
+                            ? `/naconsupport/products/platforms/${selectedProduct.platform}.svg`
+                            : selectedProduct.image
+                        }
+                        alt={variant.platform}
+                        className="absolute top-2 right-2 w-6 h-6 object-contain"
+                      />
+                      <p className="text-black">{variant.name}</p>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            ) : (
+              <section className="w-[800px]">
+                <VariantSlider
+                  data={selectedProduct.variants}
+                  handleVariant={handleVariant}
+                  selectedVariantName={selectedVariantName}
+                  selectedProduct={selectedProduct}
+                />
+              </section>
+            ))}
         </div>
       </article>
       <div className="mt-4 mb-10">
@@ -171,7 +201,6 @@ const SelectProduct = ({ message, question, options, handleOptionSelect }) => {
           icon={options.icon}
           onClick={() => handleOptionSelect(options.nextId)}
         />
-        {console.log("🚀 ~ SelectProduct ~ selectedProduct:", selectedProduct)}
       </div>
     </section>
   );

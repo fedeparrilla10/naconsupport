@@ -2,6 +2,15 @@ import Button from "./Button";
 import { products } from "../data/products";
 
 const EndProducts = ({ question, message, handleOptionSelect }) => {
+  const allProducts = products.map((product) => product.products).flat();
+
+  const getRandomProducts = (products, count) => {
+    const shuffled = products.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  };
+
+  const randomProducts = getRandomProducts(allProducts, 4);
+
   return (
     <section className="flex flex-col items-center justify-center w-full gap-4">
       <div className="flex flex-col items-center justify-center w-full gap-1.5">
@@ -16,7 +25,7 @@ const EndProducts = ({ question, message, handleOptionSelect }) => {
         <p className="text-center text-2xl">{question}</p>
       </div>
       <article className="flex flex-col md:flex-row items-center gap-3 py-4">
-        {products.map((product) => {
+        {randomProducts.map((product) => {
           return (
             <div key={product.name} className="grid grid-cols-1 text-center">
               <a href={product.link} target="_blank" rel="noreferrer">
@@ -35,7 +44,7 @@ const EndProducts = ({ question, message, handleOptionSelect }) => {
       </article>
       <a href="https://www.nacongamers.es/" className="mt-4">
         <Button content="Volver a inicio" icon="/naconsupport/back.svg" />
-      </a>{" "}
+      </a>
     </section>
   );
 };

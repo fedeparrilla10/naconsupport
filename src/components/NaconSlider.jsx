@@ -63,10 +63,15 @@ const VariantSlider = ({
             onClick={() => handleVariant(variant)}
           >
             <div
-              className={`flex flex-col items-center justify-center bg-gray-300 rounded-xl py-4 px-2 w-[166px] h-[222px] ${
+              className={`flex flex-col items-center justify-center bg-gray-300 rounded-xl py-4 px-2 w-[180px] h-[222px] ${
                 selectedVariantName === variant.name && "ring ring-blue-500"
               }`}
             >
+              <img
+                src={variant.image}
+                alt={variant.name}
+                className="w-[150px] h-[150px] object-contain mb-2"
+              />
               <img
                 src={
                   variant.platform
@@ -76,7 +81,7 @@ const VariantSlider = ({
                     : selectedProduct.image
                 }
                 alt={variant.platform}
-                className="absolute top-2 right-7 w-8 h-8 object-contain"
+                className="absolute top-2 right-2 w-6 h-6 object-contain"
               />
               <p className="text-black">{variant.name}</p>
             </div>

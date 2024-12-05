@@ -142,6 +142,10 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
                   {variant && `- ${variant.name}`}
                 </div>
                 <div>
+                  <strong>• Referencia:</strong>{" "}
+                  {variant ? variant.ref : product.ref}
+                </div>
+                <div>
                   <strong>• Tienda:</strong> {store.name} - {retail.name}
                 </div>
                 <div>

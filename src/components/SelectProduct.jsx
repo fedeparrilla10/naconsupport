@@ -157,11 +157,16 @@ const SelectProduct = ({ message, question, options, handleOptionSelect }) => {
                     onClick={() => handleVariant(variant)}
                   >
                     <div
-                      className={`flex flex-col items-center justify-center bg-gray-300 rounded-xl py-4 px-2 w-[316px] h-[372px] md:w-[166px] md:h-[222px] ${
+                      className={`flex flex-col items-center justify-center bg-gray-300 rounded-xl py-8 px-2 w-[316px] h-[372px] md:w-[166px] md:h-[222px] ${
                         selectedVariantName === variant.name &&
                         "ring ring-blue-500"
                       }`}
                     >
+                      <img
+                        src={variant.image}
+                        alt={variant.name}
+                        className="w-[200px] h-[200px] object-contain mb-2"
+                      />
                       <img
                         src={
                           variant.platform

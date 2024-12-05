@@ -80,6 +80,7 @@ export const questions = [
     options: {
       noSatNextId: 9,
       satNextId: 10,
+      amazonNextId: 19,
       icon: "/naconsupport/continue.svg",
     },
   },
@@ -210,5 +211,10 @@ export const questions = [
     type: "end",
     message:
       "¡Gracias por confirmar tus datos! Vamos a verificar todo y pronto tendrás una respuesta de nuestra parte.",
+  },
+  {
+    id: 19,
+    category: "warranty",
+    type: "end_amazon",
   },
 ];

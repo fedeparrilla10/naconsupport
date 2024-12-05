@@ -7,6 +7,7 @@ import SelectStore from "./SelectStore";
 import SelectDate from "./SelectDate";
 import EndMessage from "./EndMessage";
 import EndProducts from "./EndProducts";
+import EndAmazon from "./EndAmazon";
 import UploadFile from "./UploadFile";
 import UploadImages from "./UploadImages";
 import DataConfirmation from "./DataConfirmation";
@@ -95,6 +96,7 @@ const Stepper = ({
           handleOptionSelect={handleOptionSelect}
         />
       )}
+      {type === "end_amazon" && <EndAmazon />}
       {type === "file" && (
         <UploadFile
           subtype={subtype}

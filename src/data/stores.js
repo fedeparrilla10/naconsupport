@@ -59,38 +59,46 @@ const allProvinces = retailStores.map((provincia) => ({
 
 export const stores = [
   {
+    id: 1,
     name: "Amazon",
     url: "https://www.amazon.es",
     mail: "clientes@amazon.es",
     sat: false,
   },
   {
+    id: 2,
     name: "MediaMarkt",
     retails: allProvinces,
   },
   {
+    id: 3,
     name: "Carrefour",
     retails: allProvinces,
   },
   {
+    id: 4,
     name: "GAME",
     retails: allProvinces,
   },
   {
+    id: 5,
     name: "FNAC",
     retails: allProvinces,
   },
   {
+    id: 6,
     name: "PC Componentes",
     retails: allProvinces,
   },
   {
+    id: 7,
     name: "El Corte Inglés",
     url: "https://elcorteingles.es",
     mail: "clientes@elcorteingles.es",
     sat: false,
   },
   {
+    id: 8,
     name: "Nacongaming.com",
     url: "https://nacongaming.com",
     mail: "support@nacongaming.com",

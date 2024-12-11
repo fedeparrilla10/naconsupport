@@ -18,7 +18,6 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
   const userMedia = useUserData((state) => state.userMedia);
   const product = useProductStore((state) => state.selectedProduct);
   const variant = useProductStore((state) => state.selectedVariant);
-  console.log("🚀 ~ DataConfirmation ~ variant:", variant);
   const store = useRetailStore((state) => state.selectedStore);
   const retail = useRetailStore((state) => state.selectedRetail);
   const todaysDate = dayjs().format("DD/MM/YYYY");
@@ -49,7 +48,7 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
     formData.append("buy_date", selectedDate.format("YYYY-MM-DD"));
     formData.append("product_id", variant ? variant.id : product.id);
     formData.append(
-      "product",
+      "product_name",
       product.name + (variant ? ` - ${variant.name}` : "")
     );
     formData.append("signature", signature);

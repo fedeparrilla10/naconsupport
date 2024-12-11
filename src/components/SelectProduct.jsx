@@ -8,11 +8,12 @@ import { products } from "../data/products";
 import { ProductSlider, VariantSlider } from "./NaconSlider";
 
 const SelectProduct = ({ message, question, options, handleOptionSelect }) => {
+  const selectedCategory = useProductStore((state) => state.selectedCategory);
+  const updateCategory = useProductStore((state) => state.updateCategory);
   const selectedProduct = useProductStore((state) => state.selectedProduct);
   const updateProduct = useProductStore((state) => state.updateProduct);
   const selectedVariant = useProductStore((state) => state.selectedVariant);
   const updateVariant = useProductStore((state) => state.updateVariant);
-  const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedProductName, setSelectedProductName] = useState(null);
   const [selectedVariantName, setSelectedVariantName] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
@@ -33,7 +34,7 @@ const SelectProduct = ({ message, question, options, handleOptionSelect }) => {
   };
 
   const handleCategory = (category) => {
-    setSelectedCategory(category);
+    updateCategory(category);
     setActiveStep(activeStep + 1);
   };
 

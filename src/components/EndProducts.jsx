@@ -1,15 +1,16 @@
 import Button from "./Button";
-import { products } from "../data/products";
+import useProductStore from "../store/useProductStore";
 
-const EndProducts = ({ question, message, handleOptionSelect }) => {
-  const allProducts = products.map((product) => product.products).flat();
+const EndProducts = ({ question, message }) => {
+  const category = useProductStore((state) => state.selectedCategory);
+  const allCategoryProducts = category.products.map((product) => product);
 
   const getRandomProducts = (products, count) => {
     const shuffled = products.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, count);
   };
 
-  const randomProducts = getRandomProducts(allProducts, 4);
+  const randomProducts = getRandomProducts(allCategoryProducts, 4);
 
   return (
     <section className="flex flex-col items-center justify-center w-full gap-4">

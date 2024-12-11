@@ -74,8 +74,8 @@ const SelectStore = ({ message, question, options, handleOptionSelect }) => {
           icon={options.icon}
           onClick={() =>
             handleOptionSelect(
-              selectedStore.id === 1
-                ? options.amazonNextId
+              selectedStore.id === 1 || selectedStore.id === 8
+                ? options.specificStoreNextId
                 : selectedStore?.sat || selectedRetail?.sat
                 ? options.satNextId
                 : options.noSatNextId

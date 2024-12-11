@@ -80,7 +80,7 @@ export const questions = [
     options: {
       noSatNextId: 9,
       satNextId: 10,
-      amazonNextId: 19,
+      specificStoreNextId: 19,
       icon: "/naconsupport/continue.svg",
     },
   },
@@ -215,6 +215,6 @@ export const questions = [
   {
     id: 19,
     category: "warranty",
-    type: "end_amazon",
+    type: "end_specific_store",
   },
 ];

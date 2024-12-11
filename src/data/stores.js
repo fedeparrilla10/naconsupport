@@ -104,4 +104,14 @@ export const stores = [
     mail: "support@nacongaming.com",
     sat: false,
   },
+  {
+    id: 9,
+    name: "E.Leclerc",
+    retails: allProvinces,
+  },
+  {
+    id: 10,
+    name: "Conforama",
+    retails: allProvinces,
+  },
 ];

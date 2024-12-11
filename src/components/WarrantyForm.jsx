@@ -1,9 +1,22 @@
 import { useForm, Controller } from "react-hook-form";
-import { RadioGroup, Radio, FormControlLabel, Typography } from "@mui/material";
+import {
+  Typography,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  Select,
+  MenuItem,
+  InputLabel,
+} from "@mui/material";
 import Button from "./Button";
 import useUserData from "../store/useUserData";
+import useProductStore from "../store/useProductStore";
+import { errors } from "../data/errors";
+console.log("🚀 ~ errors:", errors);
 
 const WarrantyForm = ({ message, question, options, handleOptionSelect }) => {
+  const category = useProductStore((state) => state.selectedCategory);
   const updateProductFormData = useUserData(
     (state) => state.updateProductFormData
   );
@@ -13,8 +26,13 @@ const WarrantyForm = ({ message, question, options, handleOptionSelect }) => {
       isDamaged: "",
       isManipulatedByAnimals: "",
       isUpdated: "",
+      selectedOption: "",
     },
   });
+
+  const errorsByCategory = errors
+    .filter((error) => error.name === category.name)
+    .flatMap((error) => error.problems);
 
   const onSubmit = (data) => {
     updateProductFormData(data);
@@ -23,7 +41,8 @@ const WarrantyForm = ({ message, question, options, handleOptionSelect }) => {
       data.isWet === "no" &&
       data.isDamaged === "no" &&
       data.isManipulatedByAnimals === "no" &&
-      data.isUpdated === "yes";
+      data.isUpdated === "yes" &&
+      data.selectedOption !== null;
 
     isValid
       ? handleOptionSelect(options.validNextId)
@@ -190,6 +209,37 @@ const WarrantyForm = ({ message, question, options, handleOptionSelect }) => {
               )}
             />
           </div>
+        </div>
+
+        <div className="w-full">
+          <Typography
+            className="pb-2"
+            align="center"
+            sx={{ color: "#f8fafc", fontWeight: 600 }}
+          >
+            Por favor, seleccione el problema que presenta el producto
+          </Typography>
+          <FormControl fullWidth className="bg-white rounded p-2">
+            <InputLabel id="select-label">Seleccione una opción</InputLabel>
+            <Controller
+              name="selectedOption"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  labelId="select-label"
+                  label="Seleccione una opción"
+                  className="bg-white"
+                >
+                  {errorsByCategory.map((error) => (
+                    <MenuItem key={error.id} value={error.name}>
+                      {error.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              )}
+            />
+          </FormControl>
         </div>
 
         <div className="mt-2 mb-8">

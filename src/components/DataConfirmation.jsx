@@ -12,6 +12,7 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
   const [isSigned, setIsSigned] = useState(false);
   const [signature, setSignature] = useState(null);
   const signaturePadRef = useRef(null);
+  const productFormData = useUserData((state) => state.productFormData);
   const contactFormData = useUserData((state) => state.contactFormData);
   const selectedDate = useUserData((state) => state.selectedDate);
   const userTicket = useUserData((state) => state.userTicket);
@@ -51,6 +52,7 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
       "product_name",
       product.name + (variant ? ` - ${variant.name}` : "")
     );
+    formData.append("problem_other", productFormData.selectedOption);
     formData.append("signature", signature);
     formData.append("number_factura", userTicket);
 
@@ -161,6 +163,7 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
                 <div>• El producto no está dañado ni golpeado.</div>
                 <div>• El producto no fue manipulado por ningún animal.</div>
                 <div>• El producto está actualizado a la última versión.</div>
+                <div>• El problema es: {productFormData.selectedOption}</div>
               </div>
             </div>
 

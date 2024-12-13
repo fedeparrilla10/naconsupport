@@ -220,16 +220,18 @@ const WarrantyForm = ({ message, question, options, handleOptionSelect }) => {
             Por favor, seleccione el problema que presenta el producto
           </Typography>
           <FormControl fullWidth className="bg-white rounded p-2">
-            <InputLabel id="select-label">Seleccione una opción</InputLabel>
+            <InputLabel id="select-label" sx={{ top: "10px" }} shrink>
+              Seleccione una opción
+            </InputLabel>
             <Controller
               name="selectedOption"
               control={control}
               render={({ field }) => (
                 <Select
                   {...field}
-                  labelId="select-label"
                   label="Seleccione una opción"
-                  className="bg-white"
+                  labelId="select-label"
+                  className="bg-white pt-1"
                 >
                   {errorsByCategory.map((error) => (
                     <MenuItem key={error.id} value={error.name}>

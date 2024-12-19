@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import dayjs from "dayjs";
 import SignaturePad from "react-signature-pad-wrapper";
+import { Box, CircularProgress } from "@mui/material";
 import useProductStore from "../store/useProductStore";
 import useRetailStore from "../store/useRetailStore";
 import useUserData from "../store/useUserData";
@@ -8,20 +9,10 @@ import Button from "./Button";
 import dataURLtoFile from "../utils/dataURLtoFile";
 import { warrantyApi } from "../api/warranty";
 
-const DataConfirmation = ({ options, handleOptionSelect }) => {
+const useSignature = () => {
   const [isSigned, setIsSigned] = useState(false);
   const [signature, setSignature] = useState(null);
   const signaturePadRef = useRef(null);
-  const productFormData = useUserData((state) => state.productFormData);
-  const contactFormData = useUserData((state) => state.contactFormData);
-  const selectedDate = useUserData((state) => state.selectedDate);
-  const userTicket = useUserData((state) => state.userTicket);
-  const userMedia = useUserData((state) => state.userMedia);
-  const product = useProductStore((state) => state.selectedProduct);
-  const variant = useProductStore((state) => state.selectedVariant);
-  const store = useRetailStore((state) => state.selectedStore);
-  const retail = useRetailStore((state) => state.selectedRetail);
-  const todaysDate = dayjs().format("DD/MM/YYYY");
 
   const handleSaveSignature = () => {
     if (signaturePadRef.current) {
@@ -38,6 +29,35 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
       setIsSigned(false);
     }
   };
+
+  return {
+    isSigned,
+    signature,
+    signaturePadRef,
+    handleSaveSignature,
+    clearSignature,
+  };
+};
+
+const DataConfirmation = ({ options, handleOptionSelect }) => {
+  const [loading, setLoading] = useState(false);
+  const {
+    isSigned,
+    signature,
+    signaturePadRef,
+    handleSaveSignature,
+    clearSignature,
+  } = useSignature();
+  const productFormData = useUserData((state) => state.productFormData);
+  const contactFormData = useUserData((state) => state.contactFormData);
+  const selectedDate = useUserData((state) => state.selectedDate);
+  const userTicket = useUserData((state) => state.userTicket);
+  const userMedia = useUserData((state) => state.userMedia);
+  const product = useProductStore((state) => state.selectedProduct);
+  const variant = useProductStore((state) => state.selectedVariant);
+  const store = useRetailStore((state) => state.selectedStore);
+  const retail = useRetailStore((state) => state.selectedRetail);
+  const todaysDate = dayjs().format("DD/MM/YYYY");
 
   const handleWarrantySubmit = async () => {
     const formData = new FormData();
@@ -59,7 +79,6 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
     if (userMedia.ticket && userMedia.ticket) {
       formData.append("file_factura", userMedia.ticket);
     }
-    console.log("🚀 ~ handleWarrantySubmit ~ userMedia:", userMedia);
 
     if (userMedia.images && userMedia.images[0]) {
       formData.append("product_image_1", userMedia.images[0]);
@@ -85,11 +104,14 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
       formData.append("file_video", userMedia.video);
     }
 
+    setLoading(true);
     try {
       await warrantyApi.storeWarranty(formData);
       handleOptionSelect(options.nextId);
     } catch (error) {
       console.error("Error al hacer la solicitud:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -238,12 +260,21 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
           </div>
         </div>
       </div>
-      <Button
-        content="Confirmar y continuar"
-        isDisabled={!isSigned}
-        icon={options.icon}
-        onClick={handleWarrantySubmit}
-      />
+      <div className="flex flex-col items-center gap-4">
+        <Button
+          content={
+            <Box display="flex" alignItems="center" justifyContent={"center"}>
+              {loading && <CircularProgress size={16} />}
+              <Box ml={1}>
+                {loading ? "Cargando..." : "Confirmar y continuar"}
+              </Box>
+            </Box>
+          }
+          isDisabled={!isSigned || loading}
+          icon={options.icon}
+          onClick={handleWarrantySubmit}
+        />
+      </div>
     </section>
   );
 };

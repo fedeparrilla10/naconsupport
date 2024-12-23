@@ -1,7 +1,16 @@
 import { useState, useRef } from "react";
 import dayjs from "dayjs";
 import SignaturePad from "react-signature-pad-wrapper";
-import { Box, CircularProgress } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Button as MUIButton,
+} from "@mui/material";
 import useProductStore from "../store/useProductStore";
 import useRetailStore from "../store/useRetailStore";
 import useUserData from "../store/useUserData";
@@ -12,10 +21,16 @@ import { warrantyApi } from "../api/warranty";
 const useSignature = () => {
   const [isSigned, setIsSigned] = useState(false);
   const [signature, setSignature] = useState(null);
+  const [openAlert, setOpenAlert] = useState(false);
   const signaturePadRef = useRef(null);
 
   const handleSaveSignature = () => {
     if (signaturePadRef.current) {
+      if (signaturePadRef.current.isEmpty()) {
+        setOpenAlert(true);
+        return;
+      }
+
       const signatureDataURL = signaturePadRef.current.toDataURL("image/png");
       const file = dataURLtoFile(signatureDataURL, "signature.png");
       setSignature(file);
@@ -30,12 +45,18 @@ const useSignature = () => {
     }
   };
 
+  const handleCloseAlert = () => {
+    setOpenAlert(false);
+  };
+
   return {
     isSigned,
     signature,
     signaturePadRef,
     handleSaveSignature,
     clearSignature,
+    handleCloseAlert,
+    openAlert,
   };
 };
 
@@ -47,6 +68,8 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
     signaturePadRef,
     handleSaveSignature,
     clearSignature,
+    openAlert,
+    handleCloseAlert,
   } = useSignature();
   const productFormData = useUserData((state) => state.productFormData);
   const contactFormData = useUserData((state) => state.contactFormData);
@@ -275,6 +298,20 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
           onClick={handleWarrantySubmit}
         />
       </div>
+
+      <Dialog open={openAlert} onClose={handleCloseAlert} disableScrollLock>
+        <DialogTitle>{"Firma requerida"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Por favor, firme en el recuadro para poder finalizar la operación.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <MUIButton onClick={handleCloseAlert} color="primary" autoFocus>
+            OK
+          </MUIButton>
+        </DialogActions>
+      </Dialog>
     </section>
   );
 };

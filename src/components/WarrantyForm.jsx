@@ -13,9 +13,14 @@ import Button from "./Button";
 import useUserData from "../store/useUserData";
 import useProductStore from "../store/useProductStore";
 import { errors } from "../data/errors";
-console.log("🚀 ~ errors:", errors);
 
-const WarrantyForm = ({ message, question, options, handleOptionSelect }) => {
+const WarrantyForm = ({
+  message,
+  question,
+  options,
+  handleOptionSelect,
+  isProcessing,
+}) => {
   const category = useProductStore((state) => state.selectedCategory);
   const updateProductFormData = useUserData(
     (state) => state.updateProductFormData
@@ -31,7 +36,7 @@ const WarrantyForm = ({ message, question, options, handleOptionSelect }) => {
   });
 
   const errorsByCategory = errors
-    .filter((error) => error.name === category.name)
+    .filter((error) => error.name === category?.name)
     .flatMap((error) => error.problems);
 
   const onSubmit = (data) => {
@@ -245,7 +250,12 @@ const WarrantyForm = ({ message, question, options, handleOptionSelect }) => {
         </div>
 
         <div className="mt-2 mb-8">
-          <Button type="submit" content="Continuar" icon={options.icon} />
+          <Button
+            type="submit"
+            content="Continuar"
+            icon={options.icon}
+            isDisabled={isProcessing}
+          />
         </div>
       </form>
     </div>

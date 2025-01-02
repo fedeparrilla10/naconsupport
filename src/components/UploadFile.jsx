@@ -10,10 +10,10 @@ const UploadFile = ({
   question,
   options,
   handleOptionSelect,
+  isProcessing,
 }) => {
   const [file, setFile] = useState(null);
   const [ticketNumber, setTicketNumber] = useState("");
-  const userTicket = useUserData((state) => state.userTicket);
   const updateUserTicket = useUserData((state) => state.updateUserTicket);
   const updateUserMedia = useUserData((state) => state.updateUserMedia);
 
@@ -27,7 +27,6 @@ const UploadFile = ({
       updateUserMedia(subtype, file);
       handleOptionSelect(nextId);
     }
-    handleOptionSelect(nextId);
   };
 
   return (
@@ -74,8 +73,9 @@ const UploadFile = ({
           <Button
             key={option.nextId}
             isDisabled={
-              option.hasCondition &&
-              (!file || (subtype === "ticket" && !ticketNumber))
+              (option.hasCondition &&
+                (!file || (subtype === "ticket" && !ticketNumber))) ||
+              isProcessing
             }
             icon={option.icon}
             content={option.text}

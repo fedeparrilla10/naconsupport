@@ -1,4 +1,4 @@
-const Hero = ({ handleOptionSelect }) => {
+const Hero = ({ handleOptionSelect, isProcessing }) => {
   return (
     <main className="flex flex-col items-center gap-8">
       <div>
@@ -15,6 +15,7 @@ const Hero = ({ handleOptionSelect }) => {
           className="border-2 border-gray-500 w-40 h-42 md:w-48 md:h-48 grid grid-cols-1 grid-rows-2 place-items-center cursor-pointer rounded-lg hover:bg-gray-700 hover:text-white 
           transition duration-300 ease-in-out transform hover:scale-105 px-4 h-[180px]"
           onClick={() => handleOptionSelect(2)}
+          disabled={isProcessing}
         >
           <img
             src="/naconsupport/questionmark.svg"
@@ -28,6 +29,7 @@ const Hero = ({ handleOptionSelect }) => {
           className="border-2 border-gray-500 w-40 h-42 md:w-48 md:h-48 grid grid-cols-1 grid-rows-2 place-items-center cursor-pointer rounded-lg hover:bg-gray-700 hover:text-white 
           transition duration-300 ease-in-out transform hover:scale-105 px-4 h-[180px]"
           onClick={() => handleOptionSelect(3)}
+          disabled={isProcessing}
         >
           <img
             src="/naconsupport/warranty.svg"

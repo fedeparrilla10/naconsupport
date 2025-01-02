@@ -1,6 +1,12 @@
 import BigButton from "./BigButton";
 
-const Question = ({ message, question, options, handleOptionSelect }) => {
+const Question = ({
+  message,
+  question,
+  options,
+  handleOptionSelect,
+  isProcessing,
+}) => {
   return (
     <section className="flex flex-col items-center justify-center w-full gap-8 pt-4">
       <div className="flex flex-col items-center gap-2">
@@ -16,6 +22,7 @@ const Question = ({ message, question, options, handleOptionSelect }) => {
             onClick={() => handleOptionSelect(option.nextId)}
             content={option.text}
             icon={option.icon}
+            isDisabled={isProcessing}
           />
         ))}
       </div>

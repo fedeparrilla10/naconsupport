@@ -6,7 +6,13 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import useUserData from "../store/useUserData";
 import Button from "./Button";
 
-const SelectDate = ({ message, question, options, handleOptionSelect }) => {
+const SelectDate = ({
+  message,
+  question,
+  options,
+  handleOptionSelect,
+  isProcessing,
+}) => {
   const updateSelectedDate = useUserData((state) => state.updateSelectedDate);
   const [date, setDate] = useState(dayjs());
   const minDate = dayjs().subtract(3, "year");
@@ -55,6 +61,7 @@ const SelectDate = ({ message, question, options, handleOptionSelect }) => {
         <Button
           content="Continuar"
           icon={options.icon}
+          isDisabled={isProcessing}
           onClick={() =>
             handleSubmit(
               !isValidDate ? options.validDateNextId : options.invalidDateNextId

@@ -7,7 +7,13 @@ import useProductStore from "../store/useProductStore";
 import { products } from "../data/products";
 import { ProductSlider, VariantSlider } from "./NaconSlider";
 
-const SelectProduct = ({ message, question, options, handleOptionSelect }) => {
+const SelectProduct = ({
+  message,
+  question,
+  options,
+  handleOptionSelect,
+  isProcessing,
+}) => {
   const selectedCategory = useProductStore((state) => state.selectedCategory);
   const updateCategory = useProductStore((state) => state.updateCategory);
   const selectedProduct = useProductStore((state) => state.selectedProduct);
@@ -202,7 +208,7 @@ const SelectProduct = ({ message, question, options, handleOptionSelect }) => {
           isDisabled={
             selectedProduct?.variants.length > 0
               ? !selectedVariant
-              : !selectedProduct
+              : !selectedProduct || isProcessing
           }
           icon={options.icon}
           onClick={() => handleOptionSelect(options.nextId)}

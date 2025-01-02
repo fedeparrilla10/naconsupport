@@ -22,6 +22,7 @@ const Stepper = ({
   aproxTime,
   storeData,
   handleOptionSelect,
+  isProcessing,
 }) => {
   return (
     <section className="w-full px-4 md:w-4/5 xl:w-3/4">
@@ -31,6 +32,7 @@ const Stepper = ({
           question={question}
           options={options}
           handleOptionSelect={handleOptionSelect}
+          isProcessing={isProcessing}
         />
       )}
       {type === "faq" && (
@@ -48,6 +50,7 @@ const Stepper = ({
           handleOptionSelect={handleOptionSelect}
           aproxTime={aproxTime}
           freeWriting={freeWriting}
+          isProcessing={isProcessing}
         />
       )}
       {type === "warranty_form" && (
@@ -56,6 +59,7 @@ const Stepper = ({
           question={question}
           options={options}
           handleOptionSelect={handleOptionSelect}
+          isProcessing={isProcessing}
         />
       )}
       {type === "select_product" && (
@@ -64,6 +68,7 @@ const Stepper = ({
           question={question}
           options={options}
           handleOptionSelect={handleOptionSelect}
+          isProcessing={isProcessing}
         />
       )}
       {type === "select_store" && (
@@ -72,6 +77,7 @@ const Stepper = ({
           question={question}
           options={options}
           handleOptionSelect={handleOptionSelect}
+          isProcessing={isProcessing}
         />
       )}
       {type === "select_date" && (
@@ -80,6 +86,7 @@ const Stepper = ({
           question={question}
           options={options}
           handleOptionSelect={handleOptionSelect}
+          isProcessing={isProcessing}
         />
       )}
       {type === "end" && (
@@ -104,6 +111,7 @@ const Stepper = ({
           question={question}
           options={options}
           handleOptionSelect={handleOptionSelect}
+          isProcessing={isProcessing}
         />
       )}
       {type === "picture_files" && (
@@ -112,6 +120,7 @@ const Stepper = ({
           question={question}
           options={options}
           handleOptionSelect={handleOptionSelect}
+          isProcessing={isProcessing}
         />
       )}
       {type === "data_confirmation" && (

@@ -1,5 +1,4 @@
 export const products = [
-  // LISTADO MANDOS
   {
     id: 1,
     name: "Mandos",

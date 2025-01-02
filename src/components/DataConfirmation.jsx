@@ -88,42 +88,28 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
     formData.append("name", contactFormData.name);
     formData.append("phone", contactFormData.phone);
     formData.append("email", contactFormData.email);
-    formData.append("establecimiento", store.name + " - " + retail.name);
+    formData.append("establecimiento", `${store.name} - ${retail.name}`);
     formData.append("buy_date", selectedDate.format("YYYY-MM-DD"));
     formData.append("product_id", variant ? variant.id : product.id);
     formData.append(
       "product_name",
-      product.name + (variant ? ` - ${variant.name}` : "")
+      `${product.name}${variant ? ` - ${variant.name}` : ""}`
     );
     formData.append("problem_other", productFormData.selectedOption);
     formData.append("signature", signature);
     formData.append("number_factura", userTicket);
 
-    if (userMedia.ticket && userMedia.ticket) {
+    if (userMedia.ticket) {
       formData.append("file_factura", userMedia.ticket);
     }
 
-    if (userMedia.images && userMedia.images[0]) {
-      formData.append("product_image_1", userMedia.images[0]);
-    }
+    userMedia.images.forEach((image, index) => {
+      if (image) {
+        formData.append(`product_image_${index + 1}`, image);
+      }
+    });
 
-    if (userMedia.images && userMedia.images[1]) {
-      formData.append("product_image_2", userMedia.images[1]);
-    }
-
-    if (userMedia.images && userMedia.images[2]) {
-      formData.append("product_image_3", userMedia.images[2]);
-    }
-
-    if (userMedia.images && userMedia.images[3]) {
-      formData.append("product_image_4", userMedia.images[3]);
-    }
-
-    if (userMedia.images && userMedia.images[4]) {
-      formData.append("product_image_5", userMedia.images[4]);
-    }
-
-    if (userMedia.video && userMedia.video) {
+    if (userMedia.video) {
       formData.append("file_video", userMedia.video);
     }
 

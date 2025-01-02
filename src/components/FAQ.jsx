@@ -1,11 +1,38 @@
+import { useState, useEffect } from "react";
 import useProductStore from "../store/useProductStore";
 import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Button from "./Button";
 import { frecuentlyAsked, PDFs, videos } from "../data/faqs";
+import { productMediaApi } from "../api/product_media";
+
+const useProductMedia = () => {
+  const [loading, setLoading] = useState(false);
+  const [productMedia, setProductMedia] = useState(null);
+  const selectedProduct = useProductStore((state) => state.selectedProduct);
+
+  const getProductMedia = async () => {
+    setLoading(true);
+    try {
+      const response = await productMediaApi.getProductMedia(
+        selectedProduct.ref
+      );
+      console.log("🚀 ~ getProductMedia ~ response:", response);
+      setProductMedia(response);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { getProductMedia, productMedia, loading };
+};
 
 const FAQ = ({ message, question, handleOptionSelect }) => {
   const selectedProduct = useProductStore((state) => state.selectedProduct);
+  console.log("🚀 ~ FAQ ~ selectedProduct:", selectedProduct);
+  const { getProductMedia } = useProductMedia();
 
   return (
     <section className="flex flex-col items-center justify-center w-full gap-8">
@@ -15,6 +42,7 @@ const FAQ = ({ message, question, handleOptionSelect }) => {
         </p>
         <h3 className="text-2xl text-center md:text-start">{question}</h3>
       </div>
+      <button onClick={() => getProductMedia(selectedProduct.ref)}>hola</button>
 
       <div className="flex flex-col items-center gap-8 w-full">
         <div className="w-full md:w-1/2">

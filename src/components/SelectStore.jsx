@@ -3,7 +3,13 @@ import useRetailStore from "../store/useRetailStore";
 import Button from "./Button";
 import { stores } from "../data/stores";
 
-const SelectStore = ({ message, question, options, handleOptionSelect }) => {
+const SelectStore = ({
+  message,
+  question,
+  options,
+  handleOptionSelect,
+  isProcessing,
+}) => {
   const selectedStore = useRetailStore((state) => state.selectedStore);
   const updateStore = useRetailStore((state) => state.updateStore);
   const selectedRetail = useRetailStore((state) => state.selectedRetail);
@@ -70,7 +76,7 @@ const SelectStore = ({ message, question, options, handleOptionSelect }) => {
       <div className="mt-4 mb-10">
         <Button
           content="Continuar"
-          isDisabled={!selectedStore}
+          isDisabled={!selectedStore || isProcessing}
           icon={options.icon}
           onClick={() =>
             handleOptionSelect(

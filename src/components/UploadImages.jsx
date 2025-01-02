@@ -5,7 +5,13 @@ import { Button as MUIButton } from "@mui/material";
 import useUserData from "../store/useUserData";
 import Button from "./Button";
 
-const UploadImages = ({ message, question, options, handleOptionSelect }) => {
+const UploadImages = ({
+  message,
+  question,
+  options,
+  handleOptionSelect,
+  isProcessing,
+}) => {
   const updateUserMedia = useUserData((state) => state.updateUserMedia);
   const [images, setImages] = useState([]);
   const [file, setFile] = useState(null);
@@ -78,7 +84,9 @@ const UploadImages = ({ message, question, options, handleOptionSelect }) => {
         {options.map((option) => (
           <Button
             key={option.nextId}
-            isDisabled={option.hasCondition && images.length === 0}
+            isDisabled={
+              (option.hasCondition && images.length === 0) || isProcessing
+            }
             icon={option.icon}
             content={option.text}
             onClick={() => handleSubmit(option.nextId)}

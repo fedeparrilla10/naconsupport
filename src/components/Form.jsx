@@ -10,6 +10,7 @@ const Form = ({
   freeWriting,
   aproxTime,
   handleOptionSelect,
+  isProcessing,
 }) => {
   const updateContactFormData = useUserData(
     (state) => state.updateContactFormData
@@ -185,6 +186,7 @@ const Form = ({
             type="submit"
             content="Enviar Formulario"
             icon={options.icon}
+            isDisabled={isProcessing}
             // onClick={freeWriting && handleGeneralQuestionSubmit}
           />
         </div>

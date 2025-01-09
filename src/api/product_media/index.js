@@ -8,6 +8,14 @@ class ProductMediaApi {
 
     return response;
   }
+
+  async getProductVideos(ref) {
+    const response = await apiRequest(`saleslayer/items/videos/${ref}`, {
+      method: "GET",
+    });
+
+    return response;
+  }
 }
 
 export const productMediaApi = new ProductMediaApi();

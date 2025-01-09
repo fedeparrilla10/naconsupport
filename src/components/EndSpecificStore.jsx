@@ -3,7 +3,6 @@ import useRetailStore from "../store/useRetailStore";
 
 const EndSpecificStore = () => {
   const store = useRetailStore((state) => state.selectedStore);
-  console.log("🚀 ~ EndSpecificStore ~ store:", store);
 
   return (
     <section className="flex flex-col items-center justify-center w-full gap-6 pt-10">

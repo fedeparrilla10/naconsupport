@@ -85,7 +85,7 @@ const EndSpecificStore = () => {
               Si ha realizado la compra a través de nacongaming.com (Nacon
               Francia), ha de ponerse en contacto con ellos a través de su{" "}
               <a
-                href="https://my.nacongaming.com/fr-FR/support."
+                href="https://my.nacongaming.com/fr-FR/support"
                 target="_blank"
                 className="underline text-blue-300"
               >

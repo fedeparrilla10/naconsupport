@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import {
   Typography,
@@ -21,6 +22,7 @@ const WarrantyForm = ({
   handleOptionSelect,
   isProcessing,
 }) => {
+  const [selectedProblem, setSelectedProblem] = useState(null);
   const category = useProductStore((state) => state.selectedCategory);
   const updateProductFormData = useUserData(
     (state) => state.updateProductFormData
@@ -31,7 +33,7 @@ const WarrantyForm = ({
       isDamaged: "",
       isManipulatedByAnimals: "",
       isUpdated: "",
-      selectedOption: "",
+      selectedProblem: "",
     },
   });
 
@@ -47,11 +49,17 @@ const WarrantyForm = ({
       data.isDamaged === "no" &&
       data.isManipulatedByAnimals === "no" &&
       data.isUpdated === "yes" &&
-      data.selectedOption !== null;
+      data.selectedProblem !== null;
 
     isValid
       ? handleOptionSelect(options.validNextId)
       : handleOptionSelect(options.invalidNextId);
+  };
+
+  const handleProblemSelect = (e, field) => {
+    const value = e.target.value;
+    setSelectedProblem(value);
+    field.onChange(e);
   };
 
   return (
@@ -229,7 +237,7 @@ const WarrantyForm = ({
               Seleccione una opción
             </InputLabel>
             <Controller
-              name="selectedOption"
+              name="selectedProblem"
               control={control}
               render={({ field }) => (
                 <Select
@@ -237,6 +245,7 @@ const WarrantyForm = ({
                   label="Seleccione una opción"
                   labelId="select-label"
                   className="bg-white pt-1"
+                  onChange={(e) => handleProblemSelect(e, field)}
                 >
                   {errorsByCategory.map((error) => (
                     <MenuItem key={error.id} value={error.name}>
@@ -254,7 +263,7 @@ const WarrantyForm = ({
             type="submit"
             content="Continuar"
             icon={options.icon}
-            isDisabled={isProcessing}
+            isDisabled={isProcessing || !selectedProblem}
           />
         </div>
       </form>

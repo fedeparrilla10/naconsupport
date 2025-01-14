@@ -2,6 +2,7 @@ import Question from "./Question";
 import FAQ from "./FAQ";
 import Form from "./Form";
 import WarrantyForm from "./WarrantyForm";
+import AddressForm from "./AddressForm";
 import SelectProduct from "./SelectProduct";
 import SelectStore from "./SelectStore";
 import SelectDate from "./SelectDate";
@@ -55,6 +56,15 @@ const Stepper = ({
       )}
       {type === "warranty_form" && (
         <WarrantyForm
+          message={message}
+          question={question}
+          options={options}
+          handleOptionSelect={handleOptionSelect}
+          isProcessing={isProcessing}
+        />
+      )}
+      {type === "address_form" && (
+        <AddressForm
           message={message}
           question={question}
           options={options}

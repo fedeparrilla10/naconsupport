@@ -185,7 +185,7 @@ export const questions = [
     question: "Necesitamos que nos indique las respuestas a estas preguntas:",
     options: {
       invalidNextId: 11,
-      validNextId: 16,
+      validNextId: 20,
       icon: "/naconsupport/continue.svg",
     },
   },
@@ -216,5 +216,13 @@ export const questions = [
     id: 19,
     category: "warranty",
     type: "end_specific_store",
+  },
+  {
+    id: 20,
+    category: "warranty",
+    type: "address_form",
+    message: "Garantía de producto",
+    question: "Por favor, introduce los datos de tu domicilio:",
+    options: { nextId: 16, icon: "/naconsupport/continue.svg" },
   },
 ];

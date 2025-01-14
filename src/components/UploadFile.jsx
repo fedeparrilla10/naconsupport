@@ -27,6 +27,8 @@ const UploadFile = ({
       updateUserMedia(subtype, file);
       handleOptionSelect(nextId);
     }
+
+    handleOptionSelect(nextId);
   };
 
   return (

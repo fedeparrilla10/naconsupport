@@ -73,6 +73,7 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
   } = useSignature();
   const productFormData = useUserData((state) => state.productFormData);
   const contactFormData = useUserData((state) => state.contactFormData);
+  const addressFormData = useUserData((state) => state.addressFormData);
   const selectedDate = useUserData((state) => state.selectedDate);
   const userTicket = useUserData((state) => state.userTicket);
   const userMedia = useUserData((state) => state.userMedia);
@@ -88,6 +89,10 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
     formData.append("name", contactFormData.name);
     formData.append("phone", contactFormData.phone);
     formData.append("email", contactFormData.email);
+    formData.append("address", addressFormData.address);
+    formData.append("localidad", addressFormData.town);
+    formData.append("postal_code", addressFormData.postal_code);
+    formData.append("provincia", addressFormData.province);
     formData.append("establecimiento", `${store.name} - ${retail.name}`);
     formData.append("buy_date", selectedDate.format("YYYY-MM-DD"));
     formData.append("product_id", variant ? variant.id : product.id);
@@ -95,7 +100,7 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
       "product_name",
       `${product.name}${variant ? ` - ${variant.name}` : ""}`
     );
-    formData.append("problem_other", productFormData.selectedOption);
+    formData.append("problem_other", productFormData.selectedProblem);
     formData.append("signature", signature);
     formData.append("number_factura", userTicket);
 
@@ -163,6 +168,11 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
                 <div>
                   <strong>• Teléfono:</strong> {contactFormData.phone}
                 </div>
+                <div>
+                  <strong>• Dirección:</strong>{" "}
+                  {`${addressFormData.address}, ${addressFormData.town}, ${addressFormData.postal_code}, ${addressFormData.province}`}
+                  .
+                </div>
               </div>
 
               <div>
@@ -194,7 +204,7 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
                 <div>• El producto no está dañado ni golpeado.</div>
                 <div>• El producto no fue manipulado por ningún animal.</div>
                 <div>• El producto está actualizado a la última versión.</div>
-                <div>• El problema es: {productFormData.selectedOption}</div>
+                <div>• El problema es: {productFormData.selectedProblem}</div>
               </div>
             </div>
 

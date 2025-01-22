@@ -27,6 +27,11 @@ const SelectProduct = ({
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const handleAutocomplete = (event, product) => {
+    const category = products.find((category) =>
+      category.products.some((p) => p.name === product.name)
+    );
+
+    updateCategory(category);
     setSelectedProductName(product.name);
     updateProduct(product);
 

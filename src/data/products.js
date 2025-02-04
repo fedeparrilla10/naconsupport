@@ -347,6 +347,15 @@ export const products = [
         variants: [],
       },
       {
+        id: 7893,
+        name: "PCCH-350 PlayStation",
+        ref: "PCCH-350ESS",
+        value: "pcch350PS",
+        image: "/naconsupport/products/pcch350ps.webp",
+        link: "https://www.naconespana.es/main/productos/pcch350/",
+        variants: [],
+      },
+      {
         id: 7903,
         name: "PCCH-375",
         ref: "PCCH-375",

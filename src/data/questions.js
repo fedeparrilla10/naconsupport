@@ -162,7 +162,7 @@ export const questions = [
     subtype: "video",
     message: "Garantía de producto",
     question:
-      "Por favor, adjunte un vídeo de producto funcionando incorrectamente. Es importante que podamos ver claramente el fallo que presenta.",
+      "Por favor, adjunte un vídeo de producto funcionando incorrectamente. Es importante que podamos ver claramente el fallo que presenta, tanto en el dispositivo como en la pantalla (si aplica).",
     options: [
       {
         text: "No tengo vídeo",

@@ -76,7 +76,7 @@ const SelectStore = ({
       <div className="mt-4 mb-10">
         <Button
           content="Continuar"
-          isDisabled={!selectedStore || isProcessing}
+          isDisabled={!selectedStore || !selectedRetail || isProcessing}
           icon={options.icon}
           onClick={() =>
             handleOptionSelect(

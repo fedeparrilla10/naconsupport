@@ -104,6 +104,31 @@ const EndSpecificStore = () => {
             </p>
           </div>
         )}
+        {store.id === 7 && (
+          <div className="flex items-center justify-center flex-col gap-4">
+            <h3 className="text-xl uppercase">
+              Si ha realizado la compra a través de El Corte Inglés, ha de
+              ponerse en contacto con ellos a través de su{" "}
+              <a
+                href="https://www.elcorteingles.es/ayuda/es/contacto/"
+                target="_blank"
+                className="underline text-blue-300"
+              >
+                página de soporte
+              </a>
+              .
+            </h3>
+
+            <p className="text-lg">
+              Ellos podrán proporcionarle la ayuda necesaria para tramitar su
+              incidencia.
+            </p>
+
+            <p className="text-lg">
+              Muchas gracias por la comprensión y sentimos las molestias.
+            </p>
+          </div>
+        )}
       </div>
       <a href="https://www.nacongamers.es/" className="mt-4">
         <Button content="Volver a inicio" icon="/naconsupport/back.svg" />

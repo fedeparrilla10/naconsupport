@@ -76,11 +76,17 @@ const SelectStore = ({
       <div className="mt-4 mb-10">
         <Button
           content="Continuar"
-          isDisabled={!selectedStore || !selectedRetail || isProcessing}
+          isDisabled={
+            !selectedStore ||
+            isProcessing ||
+            (![1, 7, 8].includes(selectedStore?.id) && !selectedRetail)
+          }
           icon={options.icon}
           onClick={() =>
             handleOptionSelect(
-              selectedStore.id === 1 || selectedStore.id === 8
+              selectedStore.id === 1 ||
+                selectedStore.id === 8 ||
+                selectedStore.id === 7
                 ? options.specificStoreNextId
                 : selectedStore?.sat || selectedRetail?.sat
                 ? options.satNextId

@@ -89,7 +89,7 @@ export const questions = [
     category: "warranty",
     type: "end",
     message:
-      "La gestión de garantías de productos NACON en Amazon, Nacongaming.com o El Corte Inglés se debe realizar directamente con la tienda dónde adquirió su producto. A continuación le facilitamos datos de contacto:",
+      "La gestión de garantías de productos NACON en El Corte Inglés se debe realizar directamente con la tienda dónde adquirió su producto. A continuación le facilitamos datos de contacto:",
     storeData: true,
   },
   {

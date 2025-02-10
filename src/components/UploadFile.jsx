@@ -4,12 +4,17 @@ import { TextField } from "@mui/material";
 import useUserData from "../store/useUserData";
 import Button from "./Button";
 
-const isSafari = () => {
-  const ua = window.navigator.userAgent;
-  const isSafariBrowser = /Safari/.test(ua) && !/Chrome/.test(ua);
-  console.log("¿Es Safari?", isSafariBrowser);
-  return isSafariBrowser;
-};
+const isSafari =
+  /Safari/.test(window.navigator.userAgent) &&
+  !/Chrome/.test(window.navigator.userAgent);
+
+const isChrome =
+  /Chrome/.test(window.navigator.userAgent) &&
+  /Google Inc/.test(navigator.vendor);
+
+if (isChrome) {
+  console.log("Chrome detected");
+}
 
 const UploadFile = ({
   subtype,
@@ -25,18 +30,13 @@ const UploadFile = ({
   const updateUserMedia = useUserData((state) => state.updateUserMedia);
 
   const handleChange = (newFile) => {
-    if (isSafari()) {
-      console.log(
-        "Navegador detectado como Safari. Comprobando tamaño del archivo..."
-      );
-      const maxSize = 10 * 1024 * 1024; // 10MB
-      if (newFile && newFile.size > maxSize) {
-        if (newFile.type.includes("video") && subtype === "video") {
-          alert("El video no puede superar los 10MB en Safari.");
-        } else {
-          alert("El archivo no puede superar los 10MB en Safari.");
+    if (isSafari && newFile) {
+      if (subtype === "video") {
+        const maxSize = 20 * 1024 * 1024;
+        if (newFile.size > maxSize) {
+          alert("El video no puede superar los 10MB.");
+          return;
         }
-        return;
       }
     }
     setFile(newFile);

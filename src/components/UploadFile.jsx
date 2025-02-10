@@ -31,7 +31,11 @@ const UploadFile = ({
       );
       const maxSize = 10 * 1024 * 1024; // 10MB
       if (newFile && newFile.size > maxSize) {
-        alert("El archivo no puede superar los 10MB en Safari.");
+        if (newFile.type.includes("video") && subtype === "video") {
+          alert("El video no puede superar los 10MB en Safari.");
+        } else {
+          alert("El archivo no puede superar los 10MB en Safari.");
+        }
         return;
       }
     }

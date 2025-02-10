@@ -4,6 +4,11 @@ import { TextField } from "@mui/material";
 import useUserData from "../store/useUserData";
 import Button from "./Button";
 
+const isSafari = () => {
+  const ua = window.navigator.userAgent;
+  return /Safari/.test(ua) && !/Chrome/.test(ua);
+};
+
 const UploadFile = ({
   subtype,
   message,
@@ -18,6 +23,17 @@ const UploadFile = ({
   const updateUserMedia = useUserData((state) => state.updateUserMedia);
 
   const handleChange = (newFile) => {
+    // Validación solo para Safari
+    if (isSafari()) {
+      console.log("¿Es Safari?", isSafariBrowser); // Aquí puedes ver si detecta Safari correctamente
+      const maxSize = 10 * 1024 * 1024; // 10MB
+      if (newFile && newFile.size > maxSize) {
+        alert("El archivo no puede superar los 10MB en Safari.");
+        return;
+      }
+    }
+
+    console.log("Is not Safari");
     setFile(newFile);
   };
 

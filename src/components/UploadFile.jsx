@@ -6,7 +6,9 @@ import Button from "./Button";
 
 const isSafari = () => {
   const ua = window.navigator.userAgent;
-  return /Safari/.test(ua) && !/Chrome/.test(ua);
+  const isSafariBrowser = /Safari/.test(ua) && !/Chrome/.test(ua);
+  console.log("¿Es Safari?", isSafariBrowser);
+  return isSafariBrowser;
 };
 
 const UploadFile = ({
@@ -23,17 +25,16 @@ const UploadFile = ({
   const updateUserMedia = useUserData((state) => state.updateUserMedia);
 
   const handleChange = (newFile) => {
-    // Validación solo para Safari
     if (isSafari()) {
-      console.log("¿Es Safari?", isSafariBrowser); // Aquí puedes ver si detecta Safari correctamente
+      console.log(
+        "Navegador detectado como Safari. Comprobando tamaño del archivo..."
+      );
       const maxSize = 10 * 1024 * 1024; // 10MB
       if (newFile && newFile.size > maxSize) {
         alert("El archivo no puede superar los 10MB en Safari.");
         return;
       }
     }
-
-    console.log("Is not Safari");
     setFile(newFile);
   };
 

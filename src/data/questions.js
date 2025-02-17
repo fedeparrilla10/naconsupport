@@ -78,19 +78,15 @@ export const questions = [
     message: "Garantía de producto",
     question: "¿En qué establecimiento adquirió este producto?",
     options: {
-      noSatNextId: 9,
       satNextId: 10,
-      specificStoreNextId: 19,
+      specificStoreNextId: 9,
       icon: "/naconsupport/continue.svg",
     },
   },
   {
     id: 9,
     category: "warranty",
-    type: "end",
-    message:
-      "La gestión de garantías de productos NACON en El Corte Inglés se debe realizar directamente con la tienda dónde adquirió su producto. A continuación le facilitamos datos de contacto:",
-    storeData: true,
+    type: "end_specific_store",
   },
   {
     id: 10,
@@ -211,11 +207,6 @@ export const questions = [
     type: "end",
     message:
       "¡Gracias por confirmar tus datos! Vamos a verificar todo y pronto tendrás una respuesta de nuestra parte.",
-  },
-  {
-    id: 19,
-    category: "warranty",
-    type: "end_specific_store",
   },
   {
     id: 20,

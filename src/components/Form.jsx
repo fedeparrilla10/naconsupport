@@ -33,6 +33,7 @@ const Form = ({
             message: data.message,
           });
           handleOptionSelect(options.nextId);
+          return;
         } catch (error) {
           console.error("Error al hacer la solicitud:", error);
         }

@@ -2,7 +2,7 @@ import { apiRequest } from "../api-request";
 
 class ClickLogsApi {
   async storeClickLogs(request = {}) {
-    const response = await apiRequest(`repairments/sat_logs`, {
+    const response = await apiRequest(`repairments/storeSatClicks`, {
       method: "POST",
       body: JSON.stringify(request),
       headers: {

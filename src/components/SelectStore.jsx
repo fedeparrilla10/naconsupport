@@ -88,9 +88,7 @@ const SelectStore = ({
                 selectedStore.id === 8 ||
                 selectedStore.id === 7
                 ? options.specificStoreNextId
-                : selectedStore?.sat || selectedRetail?.sat
-                ? options.satNextId
-                : options.noSatNextId
+                : options.satNextId
             )
           }
         />

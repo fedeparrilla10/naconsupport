@@ -11,10 +11,12 @@ const MainSupport = () => {
   const currentQuestion = questions.find((q) => q.id === questionId);
 
   const handleOptionSelect = async (nextId) => {
+    if (isProcessing) return;
+
     setIsProcessing(true);
     try {
       await clickLogsApi.storeClickLogs({
-        step_id: nextId,
+        section_id: nextId,
       });
 
       setQuestionId(nextId);

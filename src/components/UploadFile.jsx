@@ -82,12 +82,24 @@ const UploadFile = ({
         )}
         {/* Si es para subir un vídeo */}
         {subtype === "video" && (
-          <div className="mt-4">
-            {file && (
-              <video width="400" controls>
-                <source src={URL.createObjectURL(file)} type={file.type} />
-              </video>
-            )}
+          <div className="flex flex-col items-center">
+            <div className="mt-4">
+              {file && (
+                <video width="400" controls>
+                  <source src={URL.createObjectURL(file)} type={file.type} />
+                </video>
+              )}
+            </div>
+
+            <p className="text-md text-center md:text-start xl:w-3/4 xl:text-center text-orange-300">
+              <span className="font-bold">ATENCIÓN</span>: Tenga en cuenta que
+              los vídeos superiores a 20MB pueden resultar en una demora del
+              proceso a la hora de enviar la información.
+              <span className="block">
+                El tiempo de carga final puede variar dependiendo de la
+                velocidad de su conexión a internet.
+              </span>
+            </p>
           </div>
         )}
       </div>

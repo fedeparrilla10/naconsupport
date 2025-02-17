@@ -348,7 +348,7 @@ export const products = [
       },
       {
         id: 7893,
-        name: "PCCH-350 PlayStation",
+        name: "PCCH-350 PS",
         ref: "PCCH-350ESS",
         value: "pcch350PS",
         image: "/naconsupport/products/pcch350ps.webp",

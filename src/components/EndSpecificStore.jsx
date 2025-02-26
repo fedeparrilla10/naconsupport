@@ -100,7 +100,7 @@ const EndSpecificStore = () => {
             </p>
 
             <p className="text-lg">
-              Muchas gracias por la comprensión y sentimos las molestias.
+              Sentimos las molestias. Muchas gracias por su comprensión.
             </p>
           </div>
         )}
@@ -125,7 +125,20 @@ const EndSpecificStore = () => {
             </p>
 
             <p className="text-lg">
-              Muchas gracias por la comprensión y sentimos las molestias.
+              Sentimos las molestias. Muchas gracias por su comprensión.
+            </p>
+          </div>
+        )}
+        {store.id === 11 && (
+          <div className="flex items-center justify-center flex-col gap-4">
+            <h3 className="text-xl uppercase">
+              Si ha realizado la compra a través de otra tienda, ha de ponerse
+              en contacto con ellos, que seguramente podrán proporcionarle la
+              ayuda necesaria para tramitar su incidencia.
+            </h3>
+
+            <p className="text-lg">
+              Sentimos las molestias. Muchas gracias por su comprensión.
             </p>
           </div>
         )}

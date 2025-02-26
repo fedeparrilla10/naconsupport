@@ -79,14 +79,15 @@ const SelectStore = ({
           isDisabled={
             !selectedStore ||
             isProcessing ||
-            (![1, 7, 8].includes(selectedStore?.id) && !selectedRetail)
+            (![1, 7, 8, 11].includes(selectedStore?.id) && !selectedRetail)
           }
           icon={options.icon}
           onClick={() =>
             handleOptionSelect(
               selectedStore.id === 1 ||
                 selectedStore.id === 8 ||
-                selectedStore.id === 7
+                selectedStore.id === 7 ||
+                selectedStore.id === 11
                 ? options.specificStoreNextId
                 : options.satNextId
             )

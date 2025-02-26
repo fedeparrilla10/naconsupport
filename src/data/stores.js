@@ -114,4 +114,9 @@ export const stores = [
     name: "Conforama",
     retails: allProvinces,
   },
+  {
+    id: 11,
+    name: "Otros",
+    sat: false,
+  },
 ];

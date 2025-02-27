@@ -132,9 +132,9 @@ const EndSpecificStore = () => {
         {store.id === 11 && (
           <div className="flex items-center justify-center flex-col gap-4">
             <h3 className="text-xl uppercase">
-              Si ha realizado la compra a través de otra tienda, ha de ponerse
-              en contacto con ellos, que seguramente podrán proporcionarle la
-              ayuda necesaria para tramitar su incidencia.
+              Si ha realizado la compra a través de otra tienda no indicada
+              previamente, ha de ponerse en contacto con ellos, para gestionar
+              su garantía directamente con el punto de venta.
             </h3>
 
             <p className="text-lg">

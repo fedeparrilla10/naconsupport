@@ -9,8 +9,9 @@ import SelectDate from "./SelectDate";
 import EndMessage from "./EndMessage";
 import EndProducts from "./EndProducts";
 import EndSpecificStore from "./EndSpecificStore";
-import UploadFile from "./UploadFile";
+import UploadTicket from "./UploadTicket";
 import UploadImages from "./UploadImages";
+import UploadVideo from "./UploadVideo";
 import DataConfirmation from "./DataConfirmation";
 
 const Stepper = ({
@@ -114,8 +115,18 @@ const Stepper = ({
         />
       )}
       {type === "end_specific_store" && <EndSpecificStore />}
-      {type === "file" && (
-        <UploadFile
+      {type === "file_ticket" && (
+        <UploadTicket
+          subtype={subtype}
+          message={message}
+          question={question}
+          options={options}
+          handleOptionSelect={handleOptionSelect}
+          isProcessing={isProcessing}
+        />
+      )}
+      {type === "file_video" && (
+        <UploadVideo
           subtype={subtype}
           message={message}
           question={question}

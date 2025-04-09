@@ -77,6 +77,7 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
   const selectedDate = useUserData((state) => state.selectedDate);
   const userTicket = useUserData((state) => state.userTicket);
   const userMedia = useUserData((state) => state.userMedia);
+  console.log("🚀 ~ DataConfirmation ~ userMedia:", userMedia);
   const product = useProductStore((state) => state.selectedProduct);
   const variant = useProductStore((state) => state.selectedVariant);
   const store = useRetailStore((state) => state.selectedStore);

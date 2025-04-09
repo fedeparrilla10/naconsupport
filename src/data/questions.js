@@ -112,7 +112,7 @@ export const questions = [
   {
     id: 12,
     category: "warranty",
-    type: "file",
+    type: "file_ticket",
     subtype: "ticket",
     message: "Garantía de producto",
     question:
@@ -154,7 +154,7 @@ export const questions = [
   {
     id: 14,
     category: "warranty",
-    type: "file",
+    type: "file_video",
     subtype: "video",
     message: "Garantía de producto",
     question:

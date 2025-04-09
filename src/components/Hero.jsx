@@ -33,7 +33,7 @@ const Hero = ({ handleOptionSelect, isProcessing }) => {
         >
           <img
             src="/naconsupport/warranty.svg"
-            alt="Realizar una consulta"
+            alt="Garantía de producto"
             width={70}
             height={70}
           />

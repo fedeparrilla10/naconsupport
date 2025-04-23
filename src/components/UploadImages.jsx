@@ -13,6 +13,7 @@ const UploadImages = ({
   isProcessing,
 }) => {
   const updateUserMedia = useUserData((state) => state.updateUserMedia);
+  const ticketAIResponse = useUserData((state) => state.ticketAIResponse);
   const [images, setImages] = useState([]);
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");

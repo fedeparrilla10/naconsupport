@@ -1,12 +1,5 @@
 import { useState } from "react";
-import {
-  TextField,
-  Dialog,
-  DialogTitle,
-  DialogActions,
-  DialogContent,
-  Button as MuiButton,
-} from "@mui/material";
+import { TextField } from "@mui/material";
 import useUserData from "../store/useUserData";
 import useProductStore from "../store/useProductStore";
 import Button from "./Button";
@@ -20,15 +13,14 @@ const UploadTicket = ({
   handleOptionSelect,
   isProcessing,
 }) => {
-  const [ticket, setTicket] = useState(null);
   const [ticketImg, setTicketImg] = useState(null);
   const [ticketNumber, setTicketNumber] = useState("");
   const [file, setFile] = useState(null);
-  const [dialogOpen, setDialogOpen] = useState(false);
   const updateUserTicket = useUserData((state) => state.updateUserTicket);
   const updateUserMedia = useUserData((state) => state.updateUserMedia);
-  const userMedia = useUserData((state) => state.userMedia);
-  console.log("🚀 ~ userMedia:", userMedia);
+  const updateTicketAIResponse = useUserData(
+    (state) => state.updateTicketAIResponse
+  );
   const [loading, setLoading] = useState(false);
   const [AIResponse, setAIResponse] = useState("");
   const selectedProduct = useProductStore((state) => state.selectedProduct);
@@ -41,44 +33,27 @@ const UploadTicket = ({
     setTicketImg(selectedFile);
 
     const reader = new FileReader();
-    reader.onload = () => {
-      setTicket(reader.result);
-    };
-
     reader.readAsDataURL(selectedFile);
   };
 
-  const checkTicket =
-    AIResponse &&
-    AIResponse.trim()
-      .toLowerCase()
-      .includes(selectedProduct?.name?.toLowerCase());
-
-  const handleSubmit = (nextId) => {
+  const handleSubmit = async (nextId) => {
     if (file) {
+      setLoading(true);
       updateUserTicket(ticketNumber);
       updateUserMedia(subtype, ticketImg);
-
-      sendMSGToOpenAI({
-        prompt: `Dame el nombre del producto que sale en esta foto`,
-        image: file,
-      }).then((res) => {
-        setAIResponse(res?.choices[0]?.message?.content);
-        setDialogOpen(true); // Open the dialog after getting AI response
-      });
-
-      return;
+      try {
+        const res = await sendMSGToOpenAI({
+          prompt: `¿Esta imagen incluye el nombre de ${selectedProduct.name} o ${selectedProduct.value}? Tus respuestas positivas deben empezar por COINCIDENCIA y las negativas con NO COINCIDE, seguidas por un punto. Transcribí el nombre exacto que ves, tanto en lo positivo como en lo negativo.`,
+          image: file,
+        });
+        const response = res?.choices[0]?.message?.content;
+        setAIResponse(response);
+        updateTicketAIResponse(response);
+      } finally {
+        setLoading(false);
+      }
     }
-  };
 
-  const handleDialogClose = () => {
-    setDialogOpen(false);
-  };
-
-  const handleContinue = (nextId) => {
-    setDialogOpen(false);
-    updateUserTicket(ticketNumber);
-    updateUserMedia(subtype, ticketImg);
     handleOptionSelect(nextId);
   };
 
@@ -110,66 +85,20 @@ const UploadTicket = ({
           fullWidth
         />
       </div>
-      <p>{AIResponse}</p>
-      {/* <p
-        className={
-          checkTicket
-            ? "text-green-500 font-bold text-xl"
-            : "text-red-500 font-bold text-xl"
-        }
-      >
-        {AIResponse
-          ? checkTicket
-            ? "Hay coincidencia"
-            : "No hay coincidencia"
-          : ""}
-      </p> */}
       <div className="flex flex-col-reverse md:flex-row mt-4 mb-10">
         {options.map((option) => (
           <Button
             key={option.nextId}
             icon={option.icon}
             isDisabled={
-              (option.hasCondition && (!file || !ticketNumber)) || isProcessing
+              (option.hasCondition && (!file || !ticketNumber || loading)) ||
+              isProcessing
             }
             content={option.text}
             onClick={() => handleSubmit(option.nextId)}
           />
         ))}
       </div>
-
-      {/* Dialog */}
-      <Dialog open={dialogOpen} onClose={handleDialogClose}>
-        <DialogTitle>Resultado de la IA</DialogTitle>
-        <DialogContent>
-          {checkTicket ? (
-            <p className="text-green-500 font-bold">
-              Hay coincidencia con el producto seleccionado.
-            </p>
-          ) : (
-            <p className="text-red-500 font-bold">
-              No hay coincidencia con el producto seleccionado.
-            </p>
-          )}
-        </DialogContent>
-        <DialogActions>
-          {!checkTicket && (
-            <MuiButton onClick={handleDialogClose} color="secondary">
-              Cancelar
-            </MuiButton>
-          )}
-          {checkTicket && (
-            <MuiButton
-              onClick={() =>
-                handleContinue(options.find((o) => o.hasCondition).nextId)
-              }
-              color="primary"
-            >
-              Continuar
-            </MuiButton>
-          )}
-        </DialogActions>
-      </Dialog>
     </section>
   );
 };

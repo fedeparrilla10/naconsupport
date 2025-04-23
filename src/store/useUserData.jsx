@@ -6,6 +6,7 @@ const useUserData = create((set) => ({
   addressFormData: null,
   selectedDate: null,
   userTicket: null,
+  ticketAIResponse: null,
   userMedia: {
     ticket: null,
     video: null,
@@ -16,6 +17,7 @@ const useUserData = create((set) => ({
   updateAddressFormData: (addressData) => set({ addressFormData: addressData }),
   updateSelectedDate: (date) => set({ selectedDate: date }),
   updateUserTicket: (ticket) => set({ userTicket: ticket }),
+  updateTicketAIResponse: (response) => set({ ticketAIResponse: response }),
   updateUserMedia: (mediaType, media) =>
     set((state) => ({
       userMedia: {

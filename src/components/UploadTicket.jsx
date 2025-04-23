@@ -3,7 +3,7 @@ import { TextField } from "@mui/material";
 import useUserData from "../store/useUserData";
 import useProductStore from "../store/useProductStore";
 import Button from "./Button";
-import { sendMSGToOpenAI } from "../utils/openai";
+// import { sendMSGToOpenAI } from "../utils/openai";
 
 const UploadTicket = ({
   subtype,
@@ -41,14 +41,35 @@ const UploadTicket = ({
       setLoading(true);
       updateUserTicket(ticketNumber);
       updateUserMedia(subtype, ticketImg);
+
       try {
-        const res = await sendMSGToOpenAI({
-          prompt: `¿Esta imagen incluye el nombre de ${selectedProduct.name} o ${selectedProduct.value}? Tus respuestas positivas deben empezar por COINCIDENCIA y las negativas con NO COINCIDE, seguidas por un punto. Transcribí el nombre exacto que ves, tanto en lo positivo como en lo negativo.`,
-          image: file,
-        });
-        const response = res?.choices[0]?.message?.content;
+        const formData = new FormData();
+        formData.append(
+          "prompt",
+          `¿Esta imagen incluye el nombre de ${selectedProduct.name} o ${selectedProduct.value}? Tus respuestas positivas deben empezar por COINCIDENCIA y las negativas con NO COINCIDE, seguidas por un punto. Transcribí el nombre exacto que ves, tanto en lo positivo como en lo negativo.`
+        );
+        formData.append("image", file);
+
+        const res = await fetch(
+          `${import.meta.env.VITE_PUBLIC_API_URL}/api/openai/send`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+
+        if (!res.ok) {
+          throw new Error("Error en la petición al backend");
+        }
+
+        const data = await res.json();
+        const response = data?.choices?.[0]?.message?.content;
+
         setAIResponse(response);
         updateTicketAIResponse(response);
+      } catch (error) {
+        console.error("Error al enviar a OpenAI:", error);
+        setAIResponse("Error al analizar la imagen.");
       } finally {
         setLoading(false);
       }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { TextField } from "@mui/material";
 import useUserData from "../store/useUserData";
 import useProductStore from "../store/useProductStore";
+import useRetailStore from "../store/useRetailStore";
 import Button from "./Button";
 // import { sendMSGToOpenAI } from "../utils/openai";
 
@@ -24,6 +25,10 @@ const UploadTicket = ({
   const [loading, setLoading] = useState(false);
   const [AIResponse, setAIResponse] = useState("");
   const selectedProduct = useProductStore((state) => state.selectedProduct);
+  const selectedVariant = useProductStore((state) => state.selectedVariant);
+  const selectedDate = useUserData((state) => state.selectedDate);
+  const selectedStore = useRetailStore((state) => state.selectedStore);
+  const selectedRetail = useRetailStore((state) => state.selectedRetail);
 
   const handleChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -46,7 +51,12 @@ const UploadTicket = ({
         const formData = new FormData();
         formData.append(
           "prompt",
-          `¿Esta imagen incluye el nombre de ${selectedProduct.name} o ${selectedProduct.value}? Tus respuestas positivas deben empezar por COINCIDENCIA y las negativas con NO COINCIDE, seguidas por un punto. Transcribí el nombre exacto que ves, tanto en lo positivo como en lo negativo.`
+          `1) ¿Esta imagen incluye el nombre de ${selectedProduct.name}, ${selectedProduct.value} o ${selectedVariant.ref}? Tus respuestas positivas deben empezar por COINCIDENCIA-PRODUCTO y las negativas con NOCOINCIDE-PRODUCTO, seguidas por un punto.
+          
+          2) ¿Esta imagen incluye el nombre de ${selectedStore.name} y ${selectedRetail.name}? Tus respuestas positivas deben empezar por COINCIDENCIA-TIENDA y las negativas con NOCOINCIDE-TIENDA, seguidas por un punto. Ten en cuenta que tienen que coincidir ambos valores, de lo contrario sería NOCOINCIDE-TIENDA.
+
+          3) Comparame las fechas de ${selectedDate} y la que aparece en la imagen. Solamente me interesa la coincidencia en día, mes y año. Si estas coinciden, pones COINCIDENCIA-FECHA y si no, NOCOINCIDE-FECHA.
+          `
         );
         formData.append("image", file);
 
@@ -69,7 +79,7 @@ const UploadTicket = ({
         updateTicketAIResponse(response);
       } catch (error) {
         console.error("Error al enviar a OpenAI:", error);
-        setAIResponse("Error al analizar la imagen.");
+        setAIResponse(error.message);
       } finally {
         setLoading(false);
       }

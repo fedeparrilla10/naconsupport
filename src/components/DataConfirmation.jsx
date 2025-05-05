@@ -84,7 +84,9 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
   const retail = useRetailStore((state) => state.selectedRetail);
   const todaysDate = dayjs().format("DD/MM/YYYY");
 
-  const isProductOK = ticketAIResponse?.includes("COINCIDENCIA");
+  const isProductOK = ticketAIResponse?.includes("COINCIDENCIA-PRODUCTO");
+  const isStoreOK = ticketAIResponse?.includes("COINCIDENCIA-TIENDA");
+  const isDateOK = ticketAIResponse?.includes("COINCIDENCIA-FECHA");
 
   const handleWarrantySubmit = async () => {
     const formData = new FormData();
@@ -99,7 +101,9 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
     formData.append("establecimiento", `${store.name} - ${retail.name}`);
     formData.append("buy_date", selectedDate.format("YYYY-MM-DD"));
     formData.append("product_id", variant ? variant.id : product.id);
-    formData.append("ai_confirmation", isProductOK ? 1 : 0);
+    formData.append("ai_confirmation_producto", isProductOK ? 1 : 0);
+    formData.append("ai_confirmation_tienda", isStoreOK ? 1 : 0);
+    formData.append("ai_confirmation_fecha", isDateOK ? 1 : 0);
     formData.append(
       "product_name",
       `${product.name}${variant ? ` - ${variant.name}` : ""}`

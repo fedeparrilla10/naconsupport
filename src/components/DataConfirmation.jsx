@@ -87,6 +87,7 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
   const isProductOK = ticketAIResponse?.includes("COINCIDENCIA-PRODUCTO");
   const isStoreOK = ticketAIResponse?.includes("COINCIDENCIA-TIENDA");
   const isDateOK = ticketAIResponse?.includes("COINCIDENCIA-FECHA");
+  const isTicketNumberOK = ticketAIResponse?.includes("COINCIDENCIA-TICKET");
 
   const handleWarrantySubmit = async () => {
     const formData = new FormData();
@@ -104,6 +105,7 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
     formData.append("ai_confirmation_producto", isProductOK ? 1 : 0);
     formData.append("ai_confirmation_tienda", isStoreOK ? 1 : 0);
     formData.append("ai_confirmation_fecha", isDateOK ? 1 : 0);
+    formData.append("ai_confirmation_ticket", isTicketNumberOK ? 1 : 0);
     formData.append(
       "product_name",
       `${product.name}${variant ? ` - ${variant.name}` : ""}`

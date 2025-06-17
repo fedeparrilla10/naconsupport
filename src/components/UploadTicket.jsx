@@ -56,6 +56,8 @@ const UploadTicket = ({
           2) ¿Esta imagen incluye el nombre de ${selectedStore.name} y ${selectedRetail.name}? Tus respuestas positivas deben empezar por COINCIDENCIA-TIENDA y las negativas con NOCOINCIDE-TIENDA, seguidas por un punto. Ten en cuenta que tienen que coincidir ambos valores, de lo contrario sería NOCOINCIDE-TIENDA.
 
           3) Comparame las fechas de ${selectedDate} y la que aparece en la imagen. Solamente me interesa la coincidencia en día, mes y año. Si estas coinciden, pones COINCIDENCIA-FECHA y si no, NOCOINCIDE-FECHA.
+
+          4) Comparame el número de ticket que has introducido (${ticketNumber}) con el que aparece en la imagen. El mismo puede tener letras y números. Si coinciden, pones COINCIDENCIA-TICKET y si no, NOCOINCIDE-TICKET.
           `
         );
         formData.append("image", file);

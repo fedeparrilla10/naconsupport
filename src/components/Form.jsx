@@ -53,7 +53,7 @@ const Form = ({
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center justify-around w-2/4 gap-3 md:gap-4 pt-4"
+        className="flex flex-col items-center justify-around w-full md:w-2/4 gap-3 md:gap-4 pt-4"
       >
         <input
           {...register("name", {
@@ -176,10 +176,23 @@ const Form = ({
         )}
 
         {aproxTime && (
-          <p className="text-xs md:text-sm text-center md:w-3/4">
-            <span className="text-red-500 font-semibold">¡IMPORTANTE!</span>{" "}
-            {aproxTime}
-          </p>
+          <>
+            <p className="text-sm md:text-md text-center md:w-3/4 pt-4">
+              <span className="text-red-500 font-bold md:text-lg">
+                ¡IMPORTANTE!
+              </span>{" "}
+              {aproxTime}
+            </p>
+
+            <h4 class="uppercase underline font-semibold text-center md:text-start pt-4">
+              Documentación Obligatoria
+            </h4>
+            <ul>
+              <li class="list-disc">Ticket</li>
+              <li class="list-disc">Imágenes</li>
+              <li class="list-disc">Vídeo con el fallo</li>
+            </ul>
+          </>
         )}
 
         <div className="mt-4">

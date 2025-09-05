@@ -788,6 +788,14 @@ export const products = [
         link: "https://www.naconespana.es/main/productos/pccl520es/",
         variants: [],
       },
+      {
+        id: 758,
+        name: "PCGM-105RED",
+        ref: "PCGM-105RED",
+        image: "/naconsupport/products/pcgm105red.png",
+        link: "https://www.naconespana.es/main/productos/pcgm105red/",
+        variants: [],
+      },
     ],
   },
 ];

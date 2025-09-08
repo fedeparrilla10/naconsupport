@@ -72,6 +72,7 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
     handleCloseAlert,
   } = useSignature();
   const productFormData = useUserData((state) => state.productFormData);
+  console.log("🔵 ~ DataConfirmation ~ productFormData:", productFormData);
   const contactFormData = useUserData((state) => state.contactFormData);
   const addressFormData = useUserData((state) => state.addressFormData);
   const selectedDate = useUserData((state) => state.selectedDate);
@@ -110,7 +111,7 @@ const DataConfirmation = ({ options, handleOptionSelect }) => {
       "product_name",
       `${product.name}${variant ? ` - ${variant.name}` : ""}`
     );
-    formData.append("problem_other", productFormData.selectedProblem);
+    formData.append("problem_id", productFormData.selectedProblem);
     formData.append("signature", signature);
     formData.append("number_factura", userTicket);
 

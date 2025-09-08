@@ -33,13 +33,14 @@ const WarrantyForm = ({
       isDamaged: "",
       isManipulatedByAnimals: "",
       isUpdated: "",
-      selectedProblem: "",
+      selectedProblem: null,
     },
   });
 
   const errorsByCategory = errors
     .filter((error) => error.name === category?.name)
     .flatMap((error) => error.problems);
+  console.log("🔵 ~ WarrantyForm ~ errorsByCategory:", errorsByCategory);
 
   const onSubmit = (data) => {
     updateProductFormData(data);
@@ -248,7 +249,7 @@ const WarrantyForm = ({
                   onChange={(e) => handleProblemSelect(e, field)}
                 >
                   {errorsByCategory.map((error) => (
-                    <MenuItem key={error.id} value={error.name}>
+                    <MenuItem key={error.id} value={error.id}>
                       {error.name}
                     </MenuItem>
                   ))}

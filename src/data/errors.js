@@ -53,4 +53,13 @@ export const errors = [
       { id: 64, name: "Tornillos" },
     ],
   },
+  {
+    id: 4,
+    name: "Otros",
+    problems: [
+      { id: 65, name: "Teclado" },
+      { id: 66, name: "Ratón" },
+      { id: 67, name: "Otros" },
+    ],
+  },
 ];
